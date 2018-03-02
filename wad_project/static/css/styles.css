@@ -1,3 +1,5 @@
+/*Implementations on base.html */
+
 body {
     background-color: #FFB6C1;
 }
@@ -29,12 +31,12 @@ body {
 }*/
 
 
-.navbarLinks {
+#navbarLinks {
   display: flex;
   justify-content: space-between;  
 }
 
-.navbarLinks div {
+#navbarLinks div {
 	margin: 0 auto;
 
 }
@@ -49,13 +51,20 @@ a {
 	text-decoration: none;
 }
 
-#bottomBar {
-	bottom: 0;
-	right: 0;
-	left: 0;
+#bottomBarContainer {
+display: flex;
+  justify-content: space-between;  
+  align: center;
+  vertical-align: bottom;
+}
+
+#bottomBarContainer div{
+	display: inline-block;
+	margin: 0 auto;
 	text-align: center;
 }
 
+/*Implementations on species.html*/
 #speciesContainer {
   display: flex;
   justify-content: space-between;  
@@ -76,7 +85,7 @@ a {
 	border-width: 5px;
 }
 
-/*for login/register pages*/
+/*for login/register page*/
 .LoginPageBoxes {
 	min-height: 400px;
 	background-color: #b0e0e6;

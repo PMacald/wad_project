@@ -7,9 +7,10 @@ from django.contrib.auth.decorators import login_required
 from datetime import datetime
 from django import forms
 from pethub.forms import UserForm, UserProfileForm
+from django.shortcuts import redirect
 # Create your views here.
 
-
+@login_required
 def index(request):
     # Get response early so we can gather cookie info
     response = render(request, 'pethub/index.html')
@@ -40,7 +41,7 @@ def species(request):
     #Get response for client and return it (updating cookies if need be) 
     return response
 
-def login(request):
+def user_login(request):
     # boolean to show success of registration
     registered = False
     user_form = UserForm()
@@ -92,7 +93,7 @@ def login(request):
             if user:
                 if user.is_active:
                     login(request,user)
-                    return HttpResponseRedirect(reverse('index'))
+                    return redirect('index')
                 else:
                     # Account is disabled, so user cannot log in
                     return HttpResponse("Your account is disabled.")
@@ -113,3 +114,6 @@ def login(request):
                       {'user_form': user_form,
                        'profile_form': profile_form,
                        'registered': registered})
+def user_logout(request):
+    logout(request)
+    return HttpResponseRedirect(reverse('login'))
