@@ -2,13 +2,43 @@
 {% load staticfiles %}
 
 {% block title_block %}
-	Log in/Register
+	Log in
 {% endblock %}
 
 {% block body_block %}
-<h1>This is the login page.</h1>
-<div>
 
+<div id="login_box_container">
+	<div id="register_box" class="LoginPageBoxes">
+		<br />
+		<strong>Register here!</strong>
+		<form id="user_form" method="post" action="{% url 'login' %}"
+			enctype="multipart/form-data">
+
+		{% csrf_token %}
+
+			<!-- Display forms -->
+		{{ user_form.as_p }}
+		{{ profile_form.as_p }}
+
+			<!-- button to submit form -->
+			<input type="submit" name="submit" value="Register" />
+		</form>
+	</div>
+
+
+	<div id="login_box" class="LoginPageBoxes">
+		<strong>Already got an account? Log in here!</strong>
+		<form id="login_form" method="post" action="{% url 'login' %}">
+	{% csrf_token %}
+	Username: </br>
+		<input type="text" name="username" value="" size="50"/>
+		<br />
+	Password: <br />
+		<input type="password" name="password" value="" size="50"/>
+		<br />
+		<input type="submit" value="Log in"/>
+	</form>
+</div>
 </div>
 
 
