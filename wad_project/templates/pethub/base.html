@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+
+
+
+
+<html>
+	<head>
+		<meta charset="UTF-8"/>
+		<title>
+			PetHub - 
+		{% block title_block %}
+			
+		{% endblock %}
+		</title>
+	</head>
+	<body>
+		<div>
+			{% block body_block %}
+			{% endblock %}
+		</div>
+		<div>
+		
+			<a href="{% url 'about-us'%}">About Us</a>
+		</div>
+
+		
+	</body>
+</html>
