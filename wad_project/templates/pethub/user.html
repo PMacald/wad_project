@@ -2,11 +2,18 @@
 {% load staticfiles %}
 
 {% block title_block %}
-	User - 
+	User - {{user.username}}
 {% endblock %}
 	
 {% block body_block %}
-{{user.username}}
+<div id="mainBody">
+	<div id="photoFrame">
+		
+			<img src="{{user.userPicture.mug_shot.url}}" alt="{{user.username}}'s profile picture"/>
+		
+	</div>
+</div>
+
 
 
 
