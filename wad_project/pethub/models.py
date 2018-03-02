@@ -24,9 +24,6 @@ class UserProfile(models.Model):
     def __unicode__(self):
         return self.user.username
 
-
-
-
 class Post(models.Model):
     #Needs unique identifier and tags incorporated
     title = models.CharField(max_length=100, default="")

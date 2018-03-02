@@ -12,5 +12,7 @@ urlpatterns = [
     url(r'^species/$',views.species,name='species'),
     url(r'^user/$',
         views.user_profile, name='user_profile'),
+    url(r'^user/(?P<username>[\w\-]+)$',
+        views.user_profile, name='user_profile'),
     url(r'^extra-information/$',views.extra_information,name='extra-information'),
 ]

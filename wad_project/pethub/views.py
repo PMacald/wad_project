@@ -47,10 +47,10 @@ def species(request):
     return response
 
 @login_required
-def user_profile(request):
+def user_profile(request, username):
     # create context dictionary holding user's name
-    current_user = request.user
-    context_dict = {'username' : current_user.id}
+    user = User.objects.get(username=username)
+    context_dict = {'user' : user}
     return render(request, 'pethub/user.html', context_dict)
 
 def user_login(request):
