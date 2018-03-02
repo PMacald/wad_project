@@ -38,11 +38,11 @@ body {
 
 #navbarLinks div {
 	margin: 0 auto;
-
 }
 
 .main {
     margin-top: 120px; /* Add a top margin to avoid content overlay */
+	
 }
 
 a {
@@ -52,16 +52,14 @@ a {
 }
 
 #bottomBarContainer {
-display: flex;
+  display: flex;
   justify-content: space-between;  
-  align: center;
-  vertical-align: bottom;
+  
 }
 
 #bottomBarContainer div{
-	display: inline-block;
 	margin: 0 auto;
-	text-align: center;
+	text-align: center;	
 }
 
 /*Implementations on species.html*/

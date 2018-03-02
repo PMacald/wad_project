@@ -10,5 +10,7 @@ urlpatterns = [
     url(r'^logout/$',views.user_logout,name='logout'),
     url(r'^trending/$',views.trending,name='trending'),
     url(r'^species/$',views.species,name='species'),
+    url(r'^user/$',
+        views.user_profile, name='user_profile'),
     url(r'^extra-information/$',views.extra_information,name='extra-information'),
 ]

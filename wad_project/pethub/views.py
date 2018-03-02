@@ -8,6 +8,7 @@ from datetime import datetime
 from django import forms
 from pethub.forms import UserForm, UserProfileForm
 from django.shortcuts import redirect
+from pethub.models import UserProfile, User
 # Create your views here.
 
 @login_required
@@ -17,29 +18,40 @@ def index(request):
     #Get response for client and return it (updating cookies if need be) 
     return response
 
+@login_required
 def about_us(request):
     # Get response early so we can gather cookie info
     response = render(request, 'pethub/about-us.html')
     #Get response for client and return it (updating cookies if need be) 
     return response
 
+@login_required
 def trending(request):
     # Get response early so we can gather cookie info
     response = render(request, 'pethub/trending.html')
     #Get response for client and return it (updating cookies if need be) 
     return response
 
+@login_required
 def extra_information(request):
     # Get response early so we can gather cookie info
     response = render(request, 'pethub/extra-information.html')
     #Get response for client and return it (updating cookies if need be) 
     return response
 
+@login_required
 def species(request):
     # Get response early so we can gather cookie info
     response = render(request, 'pethub/species.html')
     #Get response for client and return it (updating cookies if need be) 
     return response
+
+@login_required
+def user_profile(request):
+    # create context dictionary holding user's name
+    current_user = request.user
+    context_dict = {'username' : current_user.id}
+    return render(request, 'pethub/user.html', context_dict)
 
 def user_login(request):
     # boolean to show success of registration
@@ -114,6 +126,7 @@ def user_login(request):
                       {'user_form': user_form,
                        'profile_form': profile_form,
                        'registered': registered})
+@login_required
 def user_logout(request):
     logout(request)
     return HttpResponseRedirect(reverse('login'))
