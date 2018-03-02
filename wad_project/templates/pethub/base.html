@@ -10,20 +10,45 @@
 		<title>
 			PetHub - 
 		{% block title_block %}
-			
+
 		{% endblock %}
 		</title>
+		<link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}" />
 	</head>
 	<body>
-		<div>
+
+		<div id="navbar">
+			<h3>PetHub</h3>
+			<!--<a href="{% url 'index' %}">
+				<img src="{% static 'images/homeimage.png' %}"
+				alt="Home button" height="30" width="30"/>
+			</a>-->
+		</br>
+		<div class="navbarLinks">
+			<div>
+				<a href="{% url 'index'%}">Home</a>
+			</div>
+			<div>
+				<a href="{% url 'login'%}">Log in/Register</a>
+			</div>
+			<div>
+				<a href="{% url 'trending'%}">Trending</a>
+			</div>
+			<div>
+				<a href="{% url 'species'%}">Species</a>
+			</div>
+			<div>
+				<a href="{% url 'extra-information'%}">Extra Information</a>
+			</div>
+		</div>
+	</div>
+	<div class="main">
 			{% block body_block %}
 			{% endblock %}
-		</div>
-		<div>
-		
-			<a href="{% url 'about-us'%}">About Us</a>
-		</div>
+	</div>
 
-		
-	</body>
+	<div id="bottomBar">
+		<a href="{% url 'about-us'%}" >About Us</a>
+	</div>
+</body>
 </html>

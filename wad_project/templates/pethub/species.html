@@ -1,0 +1,43 @@
+{% extends "pethub/base.html" %}
+{% load staticfiles %}
+
+{% block title_block %}
+	Species
+{% endblock %}
+
+{% block body_block %}
+<h2 class="PageDescriptor">If you would like to look at posts involving a particular animal species, please select it here:</h2>
+<div id="speciesContainer">
+	<div>
+		<a href="{% url 'index'%}">
+			<img src="{% static 'images/species_page/species_dog.jpg' %}"
+				alt="Picture of cute dog"</div>
+			</br>
+				Dogs</a>
+	</div>
+	<div>
+		<a href="{% url 'index'%}">
+			<img src="{% static 'images/species_page/species_cat.jpg' %}"
+				alt="Picture of cute cat"</div>
+			</br>
+				Cats</a>
+	</div>
+	<div>
+		<a href="{% url 'index'%}">
+			<img src="{% static 'images/species_page/species_hutch.jpg' %}"
+				alt="Picture of cute hutch animal"</div>
+			</br>
+				Hutch Animals</a>
+	</div>
+	<div>
+		<a href="{% url 'index'%}">
+			<img src="{% static 'images/species_page/species_exotic.jpg' %}"
+				alt="Picture of cute exotic animal"</div>
+			</br>
+				Exotic Animals</a>
+	</div>
+</div>
+
+
+
+{% endblock %}

@@ -1,0 +1,77 @@
+body {
+    background-color: #FFB6C1;
+}
+
+#navbar {
+	background-color: #FF69B4;
+	width: 100%;
+	position: fixed;
+	top: 0;
+	left: 0;
+	border-style: solid;
+	border-width: 2px;
+}
+/*For descriptions on different pages - ensures consistency*/
+.PageDescriptor {
+	text-align: center;
+	font-family: Verdana;
+}
+
+#navbar h3 {
+	text-align: center;
+	font-family: Verdana;
+}
+
+/*#navbar img {
+	float: left;
+	clear: left;
+}*/
+
+
+.navbarLinks {
+  display: flex;
+  justify-content: space-between;  
+}
+
+.navbarLinks div {
+	margin: 0 auto;
+
+}
+
+.main {
+    margin-top: 120px; /* Add a top margin to avoid content overlay */
+}
+
+a {
+	font-family: Verdana;
+	font-size: 20;
+	text-decoration: none;
+}
+
+#bottomBar {
+	position: fixed;
+	bottom: 0;
+	right: 0;
+	left: 0;
+	text-align: center;
+}
+
+#speciesContainer {
+  display: flex;
+  justify-content: space-between;  
+  align: center;
+}
+
+#speciesContainer div {
+	display: inline-block;
+	margin: 0 auto;
+	text-align: center;
+}
+
+#speciesContainer img {
+	width: 200px;
+	height: 200px;
+	
+	border-style: solid;
+	border-width: 5px;
+}
