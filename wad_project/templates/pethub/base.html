@@ -30,7 +30,6 @@
 			</div>
 			<div>
 				{% if user.is_authenticated %}
-				<!-- HARD CODED - BAD ###########################################################################-->
 				<a href="{% url 'user_profile' %}{{ user.username }}">Your Profile</a>
 				{% else %}
 				<a href="{% url 'login'%}">Log in/Register</a>

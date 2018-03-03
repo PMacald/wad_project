@@ -9,8 +9,12 @@
 <div id="mainBody">
 	<div id="photoFrame">
 		
-			<img src="{{user.userPicture.mug_shot.url}}" alt="{{user.username}}'s profile picture"/>
+			<img src="{{user.profile.userPicture}}" alt="{{user.username}}'s profile picture"/>
 		
+	</div>
+	<div id="infoFrame">
+		<h2>{{user.first_name}} {{user.last_name}}</h2> </br>
+		<p>{{user.profile.bio}}</p>
 	</div>
 </div>
 

@@ -52,14 +52,15 @@ a {
 }
 
 #bottomBarContainer {
-  display: flex;
-  justify-content: space-between;  
-  
+	display: flex;
+	justify-content: space-between; 
+	bottom: 0;
+	clear: both;
 }
 
 #bottomBarContainer div{
+	display: inline-block;
 	margin: 0 auto;
-	text-align: center;	
 }
 
 /*Implementations on species.html*/
@@ -112,4 +113,25 @@ a {
 	max-width: 80%;
 	justify-content: space-between;
 	align: center;
+}
+
+/* Styles for user profiles */
+#photoFrame {
+	float: left;
+	width: 200px;
+	height: 200px;
+	border-style: solid;
+	border-width: 3px;
+	border-color: purple;
+}
+
+#infoFrame {
+	display: flex;
+	width: 70%;
+	margin-left: 20px;
+	float: left;
+	border-style: solid;
+	border-width: 3px;
+	border-color: purple;
+	padding: 10px;
 }

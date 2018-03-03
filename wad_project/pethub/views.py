@@ -81,8 +81,8 @@ def user_login(request):
                 profile.user = user
 
                 #If a profile picture is provided, save it to the UserProfile model
-                if 'picture' in request.FILES:
-                    profile.picture = request.FILES['picture']
+                if 'userPicture' in request.FILES:
+                    profile.userPicture = request.FILES['userPicture']
 
                 # save UserProfile instance
                 profile.save()

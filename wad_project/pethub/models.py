@@ -15,7 +15,6 @@ class UserProfile(models.Model):
     bio = models.CharField(max_length=300,default="",blank=True)
     userPicture = models.ImageField(upload_to='user_images',blank=True)
 
-    
     def __str__(self):
         return self.user.username
 
