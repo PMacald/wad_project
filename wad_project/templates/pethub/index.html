@@ -6,7 +6,11 @@
 {% endblock %}
 
 {% block body_block %}
-<h1>Welcome to PetHub!</h1>
+{% if user.first_name %}
+<h1>Welcome to PetHub, {{ user.first_name }}!</h1>
+{% else %}
+<h1>Welcome to PetHub, {{ user.username }}!</h1>
+{% endif %}
 
 
 

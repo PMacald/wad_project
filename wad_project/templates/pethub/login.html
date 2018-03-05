@@ -2,12 +2,22 @@
 {% load staticfiles %}
 
 {% block title_block %}
-	Log in
+	Log in	
 {% endblock %}
 
 {% block body_block %}
 
+
+<!--------------------------------------------------------------------------------------
+	{% if registered or user.is_authenticated %}
+		<script>window.location = "/pethub/";</script>
+	{% endif %}
+	---------------------------------------------------------------------------------------->
+
+
+
 <div id="login_box_container">
+
 	<div id="register_box" class="LoginPageBoxes">
 		<br />
 		<strong>Register here!</strong>

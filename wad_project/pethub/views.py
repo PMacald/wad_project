@@ -54,10 +54,13 @@ def user_profile(request, username):
     return render(request, 'pethub/user.html', context_dict)
 
 def user_login(request):
+    
     # boolean to show success of registration
     registered = False
     user_form = UserForm()
     profile_form = UserProfileForm()
+    
+
     
     #Try and get data if POST method used
     if request.method == "POST":
@@ -89,6 +92,7 @@ def user_login(request):
 
                 # show registration was successful
                 registered = True
+                
             else:
                 # form was invalid, print error message
                 print(user_form.errors, profile_form.errors)
@@ -105,7 +109,7 @@ def user_login(request):
             if user:
                 if user.is_active:
                     login(request,user)
-                    return redirect('index')
+                    return redirect(reverse('index'))
                 else:
                     # Account is disabled, so user cannot log in
                     return HttpResponse("Your account is disabled.")

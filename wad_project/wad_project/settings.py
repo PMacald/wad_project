@@ -35,6 +35,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+# Include url for redirection after login
 
 # Application definition
 
