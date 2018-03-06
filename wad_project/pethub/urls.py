@@ -15,4 +15,5 @@ urlpatterns = [
     url(r'^user/(?P<username>[\w\-]+)$',
         views.user_profile, name='user_profile'),
     url(r'^extra-information/$',views.extra_information,name='extra-information'),
+    url(r'^post-upload/$',views.post_upload,name='post-upload'),
 ]

@@ -6,16 +6,18 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from datetime import datetime
 from django import forms
-from pethub.forms import UserForm, UserProfileForm
+from pethub.forms import UserForm, UserProfileForm, PostForm
 from django.shortcuts import redirect
-from pethub.models import UserProfile, User
+from pethub.models import UserProfile, User, Post
 # Create your views here.
 
 @login_required
 def index(request):
+    post_list = Post.objects.order_by('title')
     user_list = User.objects.order_by('last_name')
     # Get response early so we can gather cookie info
-    response = render(request, 'pethub/index.html', {'user_list' : user_list})
+    response = render(request, 'pethub/index.html', {'user_list' : user_list,
+                                                     'post_list' : post_list})
     #Get response for client and return it (updating cookies if need be) 
     return response
 
@@ -138,7 +140,7 @@ def user_login(request):
 def post_upload(request):
     # boolean to show success of upload
     uploaded = False
-    post_form = PostForm()
+
 
     #Try and get data if POST method used
     if request.method == "POST":
@@ -169,12 +171,14 @@ def post_upload(request):
 
     else:
         #not using POST methods, so make new models 
-        post_form = UserForm()
-    
+        post_form = PostForm()
+        
+    current_user = request.user
+    context_dict = {'post_form': post_form,
+                       'uploaded': uploaded,
+                        'user': current_user}
     #Render template according to data received
-    return render(request, 'pethub/post-upload.html',
-                      {'post_form': user_form,
-                       'uploaded': uploaded})
+    return render(request, 'pethub/post-upload.html', context_dict)
     
 @login_required
 def user_logout(request):

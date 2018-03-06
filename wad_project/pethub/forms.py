@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
-from pethub.models import UserProfile
+from pethub.models import UserProfile, Post
+
 
 class UserForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput())
@@ -14,7 +15,7 @@ class UserProfileForm(forms.ModelForm):
         model = UserProfile
         fields = ('userPicture', 'bio')
 
-class PostForm(forms.modelForm):
+class PostForm(forms.ModelForm):
     class Meta:
         model = Post
         fields = ('title', 'description', 'picture')

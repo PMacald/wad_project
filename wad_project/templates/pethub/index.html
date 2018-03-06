@@ -15,6 +15,17 @@
 	{% for person in user_list %}
 		<a href="{% url 'user_profile' %}{{ person.username }}">{{person.username}}'s Profile</a><br />
 	{% endfor %}
+	{% for post in post_list %}
+		
+			<div class="post_container">
+				<h3>{{post.title}}</h3><br />
+				{% if post.picture %}
+					<img width="auto" height="200px" src="{{ MEDIA_URL }}{{post.picture}}">
+				{% endif %}
+				
+				<p>{{post.description}}</p><br />
+			</div>
+	{% endfor %}
 {% endif %}
 
 

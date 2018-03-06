@@ -67,7 +67,6 @@ a {
 #speciesContainer {
   display: flex;
   justify-content: space-between;  
-  align: center;
 }
 
 #speciesContainer div {
@@ -140,4 +139,15 @@ a {
 
 .textInfo{
 	clear: both;
+}
+
+/* for feed pages */
+.post_container {
+	width: 70%;
+	border-style: solid;
+	border-width: 2px;
+	border-color: purple;
+	display: flex;
+	margin: 0 auto;
+	padding-top: 20px;
 }
