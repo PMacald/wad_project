@@ -118,20 +118,26 @@ a {
 /* Styles for user profiles */
 #photoFrame {
 	float: left;
-	width: 200px;
-	height: 200px;
+
 	border-style: solid;
 	border-width: 3px;
 	border-color: purple;
 }
 
+#photoFrame img {
+	width: 200px;
+	height: 200px;
+}
+
 #infoFrame {
-	display: flex;
 	width: 70%;
 	margin-left: 20px;
-	float: left;
 	border-style: solid;
 	border-width: 3px;
 	border-color: purple;
 	padding: 10px;
+}
+
+.textInfo{
+	clear: both;
 }

@@ -13,3 +13,8 @@ class UserProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
         fields = ('userPicture', 'bio')
+
+class PostForm(forms.modelForm):
+    class Meta:
+        model = Post
+        fields = ('title', 'description', 'picture')

@@ -8,63 +8,63 @@
 	<head>
 		<meta charset="UTF-8"/>
 		<link rel="icon" href="{% static 'images/favicon.ico' %}">
-		<title>
+			<title>
 			PetHub - 
 		{% block title_block %}
 
 		{% endblock %}
-		</title>
-		<link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}" />
-	</head>
-	<body>
+			</title>
+			<link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}" />
+		</head>
+		<body>
 
-		<div id="navbar">
-			<h2>PetHub</h2>
-			<!--<a href="{% url 'index' %}">
+			<div id="navbar">
+				<h2>PetHub</h2>
+				<!--<a href="{% url 'index' %}">
 				<img src="{% static 'images/homeimage.png' %}"
 				alt="Home button" height="30" width="30"/>
 			</a>-->
-		</br>
-		<div id="navbarLinks">
-			<div>
-				<a href="{% url 'index'%}">Home</a>
-			</div>
-			<div>
+			</br>
+			<div id="navbarLinks">
+				<div>
+					<a href="{% url 'index'%}">Home</a>
+				</div>
+				<div>
 				{% if user.is_authenticated %}
-				<a href="{% url 'user_profile' %}{{ user.username }}">Your Profile</a>
+					<a href="{% url 'user_profile' %}{{ user.username }}">Your Profile</a>
 				{% else %}
-				<a href="{% url 'login'%}">Log in/Register</a>
+					<a href="{% url 'login'%}">Log in/Register</a>
 				{% endif %}
-			</div>
-			<div>
-				<a href="{% url 'trending'%}">Trending</a>
-			</div>
-			<div>
-				<a href="{% url 'species'%}">Species</a>
-			</div>
-			<div>
-				<a href="{% url 'extra-information'%}">Extra Information</a>
+				</div>
+				<div>
+					<a href="{% url 'trending'%}">Trending</a>
+				</div>
+				<div>
+					<a href="{% url 'species'%}">Species</a>
+				</div>
+				<div>
+					<a href="{% url 'extra-information'%}">Extra Information</a>
+				</div>
 			</div>
 		</div>
-	</div>
 
-	<div class="main">
+		<div class="main">
 			{% block body_block %}
 			{% endblock %}
-	</div>
-
-	<div id="bottomBarContainer">
-
-		<div>
-			<a href="{% url 'about-us'%}" >About Us </a>
 		</div>
+
+		<div id="bottomBarContainer">
+
+			<div>
+				<a href="{% url 'about-us'%}" >About Us </a>
+			</div>
 		{% if user.is_authenticated %}
-		<div>
+			<div>
 
-			<a href="{% url 'logout'%}" >Log out</a>
+				<a href="{% url 'logout'%}" >Log out</a>
 
-		</div>
+			</div>
 		{% endif %}
-	</div>
-</body>
+		</div>
+	</body>
 </html>

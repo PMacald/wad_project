@@ -13,8 +13,9 @@ from pethub.models import UserProfile, User
 
 @login_required
 def index(request):
+    user_list = User.objects.order_by('last_name')
     # Get response early so we can gather cookie info
-    response = render(request, 'pethub/index.html')
+    response = render(request, 'pethub/index.html', {'user_list' : user_list})
     #Get response for client and return it (updating cookies if need be) 
     return response
 
@@ -50,7 +51,9 @@ def species(request):
 def user_profile(request, username):
     # create context dictionary holding user's name
     user = User.objects.get(username=username)
-    context_dict = {'user' : user}
+    userProfile = UserProfile.objects.get_or_create(user=user)[0]
+    context_dict = {'user' : user,
+                    'userProfile' : userProfile}
     return render(request, 'pethub/user.html', context_dict)
 
 def user_login(request):
@@ -130,6 +133,49 @@ def user_login(request):
                       {'user_form': user_form,
                        'profile_form': profile_form,
                        'registered': registered})
+
+@login_required
+def post_upload(request):
+    # boolean to show success of upload
+    uploaded = False
+    post_form = PostForm()
+
+    #Try and get data if POST method used
+    if request.method == "POST":
+        # fill in data from UserForm and UserProfileForm
+            post_form = PostForm(data=request.POST)
+            
+
+            if post_form.is_valid():
+                # save user info to the database
+                post = post_form.save()
+
+                post.save()
+                
+
+                #If a post picture is provided, save it to the UserProfile model
+                if 'picture' in request.FILES:
+                    post.picture = request.FILES['picture']
+                
+                # save post instance
+                post.save()
+
+                # show registration was successful
+                uploaded = True
+                
+            else:
+                # form was invalid, print error message
+                print(post_form.errors, post_form.errors)
+
+    else:
+        #not using POST methods, so make new models 
+        post_form = UserForm()
+    
+    #Render template according to data received
+    return render(request, 'pethub/post-upload.html',
+                      {'post_form': user_form,
+                       'uploaded': uploaded})
+    
 @login_required
 def user_logout(request):
     logout(request)
