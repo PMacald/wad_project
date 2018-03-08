@@ -13,7 +13,7 @@ from pethub.models import UserProfile, User, Post
 
 @login_required
 def index(request):
-    post_list = Post.objects.order_by('title')
+    post_list = Post.objects.order_by('-upload_date')
     user_list = User.objects.order_by('last_name')
     # Get response early so we can gather cookie info
     response = render(request, 'pethub/index.html', {'user_list' : user_list,
@@ -53,7 +53,8 @@ def species(request):
 def user_profile(request, username):
     # create context dictionary holding user's name
     user = User.objects.get(username=username)
-    userProfile = UserProfile.objects.get_or_create(user=user)[0]
+    userProfile = UserProfile.objects.get_or_create(user=user)[0]
+
     context_dict = {'user' : user,
                     'userProfile' : userProfile}
     return render(request, 'pethub/user.html', context_dict)
@@ -152,6 +153,10 @@ def post_upload(request):
                 # save user info to the database
                 post = post_form.save()
 
+                #########################################################
+                post.user_profile = request.user.ge
+
+                
                 post.save()
                 
 
@@ -173,10 +178,9 @@ def post_upload(request):
         #not using POST methods, so make new models 
         post_form = PostForm()
         
-    current_user = request.user
+    
     context_dict = {'post_form': post_form,
-                       'uploaded': uploaded,
-                        'user': current_user}
+                       'uploaded': uploaded,}
     #Render template according to data received
     return render(request, 'pethub/post-upload.html', context_dict)
     

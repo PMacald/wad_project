@@ -29,7 +29,10 @@ class Post(models.Model):
     likes = models.IntegerField(default=0)
     description = models.CharField(max_length=300,default="")
     picture = models.ImageField(upload_to="post_images",blank=True)
-    #upload_date = datetime.now()
+    upload_date = models.DateTimeField(auto_now_add=True)
+
+    ######################################################################
+    user_profile = models.ForeignKey("UserProfile", default=0)
 
     def __str__(self):
         return self.title

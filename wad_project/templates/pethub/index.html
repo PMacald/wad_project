@@ -23,7 +23,7 @@
 					<img width="auto" height="200px" src="{{ MEDIA_URL }}{{post.picture}}">
 				{% endif %}
 				
-				<p>{{post.description}}</p><br />
+				<p>{{post.description}} - posted by {{post.user.username}} at {{post.upload_date}}</p><br />
 			</div>
 	{% endfor %}
 {% endif %}
