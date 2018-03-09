@@ -98,30 +98,15 @@ def user_login(request):
 
                 # show registration was successful
                 registered = True
-                
+                login(request)
             else:
                 # form was invalid, print error message
                 print(user_form.errors, profile_form.errors)
 
         # for users that want to be signed in instead
         elif request.POST.get('submit') == "Log in":
-            username = request.POST.get('username')
-            password = request.POST.get('password')
-
-            #authenticate username and password
-            user = authenticate(username=username,password=password)
-
-            # If credentials are valid
-            if user:
-                if user.is_active:
-                    login(request,user)
-                    return redirect(reverse('index'))
-                else:
-                    # Account is disabled, so user cannot log in
-                    return HttpResponse("Your account is disabled.")
-            else:
-                print("Invalid login details: {0}, {1}".format(username, password))
-                return HttpResponse("Invalid login details - please try again.")
+            login(request)
+            
 
     ####################################################################################
     # May need to edit to suit both forms        
@@ -153,10 +138,10 @@ def post_upload(request):
                 # save user info to the database
                 post = post_form.save()
 
-                #########################################################
+                # save associated user
                 post.user = User.objects.get(username=request.user.username)
 
-                
+                # Save post information
                 post.save()
                 
 
@@ -189,6 +174,7 @@ def user_logout(request):
     logout(request)
     return HttpResponseRedirect(reverse('login'))
 
+<<<<<<< HEAD
 @login_required
 def like_post(request):
     post_id = None
@@ -202,3 +188,23 @@ def like_post(request):
                 post.likes = likes
                 post.save()
     return HttpResponse(likes)
+=======
+def login(request):
+    username = request.POST.get('username')
+    password = request.POST.get('password')
+
+    #authenticate username and password
+    user = authenticate(username=username,password=password)
+
+    # If credentials are valid
+    if user:
+        if user.is_active:
+            login(request,user)
+            return redirect(reverse('index'))
+        else:
+                    # Account is disabled, so user cannot log in
+            return HttpResponse("Your account is disabled.")
+    else:
+        print("Invalid login details: {0}, {1}".format(username, password))
+        return HttpResponse("Invalid login details - please try again.")
+>>>>>>> 1ff90bccde282c1f69d5cca7e707fc59b16aa723

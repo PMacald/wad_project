@@ -23,6 +23,7 @@
 					<img width="auto" height="200px" src="{{ MEDIA_URL }}{{post.picture}}">
 				{% endif %}
 				
+<<<<<<< HEAD
 				<p>{{post.description}} - posted by {{post.user.username}} at {{post.upload_date}}</p><br />
 				<strong id="like">{{post.likes}}</strong> people like this post
 				{% if user.is_authenticated %}
@@ -31,6 +32,9 @@
 						Like
 					</button>
 				{% endif %}
+=======
+				<p>{{post.description}} - posted by <a href="{% url 'user_profile' %}{{ post.user.username }}">{{post.user.username}}</a> at {{post.upload_date}}</p><br />
+>>>>>>> 1ff90bccde282c1f69d5cca7e707fc59b16aa723
 			</div>
 	{% endfor %}
 {% endif %}
