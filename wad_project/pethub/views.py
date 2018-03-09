@@ -189,3 +189,40 @@ def user_logout(request):
     logout(request)
     return HttpResponseRedirect(reverse('login'))
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+@login_required
+def like_post(request):
+    post_id = None
+    if request.method == 'GET':
+        post_id = request.GET['posts_id']
+        likes = 0
+        if post_id:
+            post = Post.objects.get(id=int(post_id))
+            if post:
+                likes = post.likes + 1
+                post.likes = likes
+                post.save()
+    return HttpResponse(likes)
+=======
+def login(request):
+    username = request.POST.get('username')
+    password = request.POST.get('password')
+
+    #authenticate username and password
+    user = authenticate(username=username,password=password)
+
+    # If credentials are valid
+    if user:
+        if user.is_active:
+            login(request,user)
+            return redirect(reverse('index'))
+        else:
+                    # Account is disabled, so user cannot log in
+            return HttpResponse("Your account is disabled.")
+    else:
+        print("Invalid login details: {0}, {1}".format(username, password))
+        return HttpResponse("Invalid login details - please try again.")
+>>>>>>> 1ff90bccde282c1f69d5cca7e707fc59b16aa723
+>>>>>>> c7aadbeb09e82d89f234a42ded826041774db35c
