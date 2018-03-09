@@ -11,7 +11,7 @@
 		{% if userProfile.userPicture %}
 			<img width="200" height="200" src="{{ MEDIA_URL }}{{userProfile.userPicture}}" alt="{{user.username}}'s profile picture"/>
 		{% else %}
-			<img width="200" height="200" src="{% static 'images/user_profile/NoImageAvailable.png' %}" alt="{{user.username}}'s profile picture"/>
+			<src="{% static 'images/user_profile/NoImageAvailable.png' %}" alt="{{user.username}}'s profile picture"/>
 		{% endif %}
 	</div>
 	<div id="infoFrame">
@@ -19,8 +19,8 @@
 		<h2 class="textInfo">{{user.first_name}} {{user.last_name}}</h2>
 		<br />
 		<p class="textInfo" >{{userProfile.bio}}</p>
-		<br />
-		<a href="{% url 'post-upload'%}" >Upload a Post</a>
+		
+		
 	</div>
 </div>
 

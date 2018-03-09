@@ -63,7 +63,10 @@
 			</div>
 		{% if user.is_authenticated %}
 			<div>
-
+				<a href="{% url 'post-upload'%}" >Upload a Post</a>
+			</div>
+			<div>
+				
 				<a href="{% url 'logout'%}" >Log out</a>
 
 			</div>

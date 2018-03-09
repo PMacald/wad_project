@@ -6,28 +6,23 @@
 {% endblock %}
 
 {% block body_block %}
-<!--------------------------------------------------------------------------------------
-	{% if registered or user.is_authenticated %}
-		<script>window.location = "/pethub/";</script>
-	{% endif %}
-	---------------------------------------------------------------------------------------->
-<div id="post_upload_container">
 
 	<div id="post_upload_box">
-		<br />
-		<strong>Upload a Post Here!</strong>
-		<form id="post_upload_form" method="post" action="{% url 'post-upload' %}"
-			enctype="multipart/form-data">
 
-		{% csrf_token %}
+		<div >
+			<br />
+			<strong>Upload a Post Here!</strong>
+			<form id="post_upload_form" method="post" action="{% url 'post-upload' %}"
+				enctype="multipart/form-data">
 
-			<!-- Display forms -->
-		{{ post_form.as_p }}
+			{% csrf_token %}
 
-			<!-- button to submit form -->
-			<input type="submit" name="submit" value="Upload" />
-		</form>
+				<!-- Display forms -->
+			{{ post_form.as_p }}
+
+				<!-- button to submit form -->
+				<input type="submit" name="submit" value="Upload" />
+			</form>
+		</div>
 	</div>
-</div>
-</div>
 {% endblock %}

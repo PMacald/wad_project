@@ -23,7 +23,12 @@
 					<img width="auto" height="200px" src="{{ MEDIA_URL }}{{post.picture}}">
 				{% endif %}
 				
-				<p>{{post.description}} - posted by <a href="{% url 'user_profile' %}{{ post.user.username }}">{{post.user.username}}</a> at {{post.upload_date}}</p><br />
+				<p class="post_info_text">{{post.description}} - posted by <a href="{% url 'user_profile' %}{{ post.user.username }}">{{post.user.username}}</a> at {{post.upload_date}}</p><br />
+				<p class="post_tags">Tags: 
+				{% for tag in tag_list %}
+					{{ tag }}
+				{% endfor %}
+				</p>
 			</div>
 	{% endfor %}
 {% endif %}

@@ -98,15 +98,30 @@ def user_login(request):
 
                 # show registration was successful
                 registered = True
-                login(request)
+                
             else:
                 # form was invalid, print error message
                 print(user_form.errors, profile_form.errors)
 
         # for users that want to be signed in instead
         elif request.POST.get('submit') == "Log in":
-            login(request)
-            
+            username = request.POST.get('username')
+            password = request.POST.get('password')
+
+            #authenticate username and password
+            user = authenticate(username=username,password=password)
+
+            # If credentials are valid
+            if user:
+                if user.is_active:
+                    login(request,user)
+                    return redirect(reverse('index'))
+                else:
+                    # Account is disabled, so user cannot log in
+                    return HttpResponse("Your account is disabled.")
+            else:
+                print("Invalid login details: {0}, {1}".format(username, password))
+                return HttpResponse("Invalid login details - please try again.")
 
     ####################################################################################
     # May need to edit to suit both forms        
@@ -174,21 +189,3 @@ def user_logout(request):
     logout(request)
     return HttpResponseRedirect(reverse('login'))
 
-def login(request):
-    username = request.POST.get('username')
-    password = request.POST.get('password')
-
-    #authenticate username and password
-    user = authenticate(username=username,password=password)
-
-    # If credentials are valid
-    if user:
-        if user.is_active:
-            login(request,user)
-            return redirect(reverse('index'))
-        else:
-                    # Account is disabled, so user cannot log in
-            return HttpResponse("Your account is disabled.")
-    else:
-        print("Invalid login details: {0}, {1}".format(username, password))
-        return HttpResponse("Invalid login details - please try again.")

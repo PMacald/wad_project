@@ -88,7 +88,6 @@ a {
 	min-height: 400px;
 	background-color: #b0e0e6;
 	justify-content: space-between;
-	content-align: center;
 	line-height: 50px;
 	text-align: center;
 	font-family: Verdana;
@@ -111,13 +110,12 @@ a {
 	margin: 0 auto;
 	max-width: 80%;
 	justify-content: space-between;
-	align: center;
 }
 
 /* Styles for user profiles */
 #photoFrame {
 	float: left;
-
+	margin: 20px auto;
 	border-style: solid;
 	border-width: 3px;
 	border-color: purple;
@@ -130,11 +128,11 @@ a {
 
 #infoFrame {
 	width: 70%;
-	margin-left: 20px;
 	border-style: solid;
 	border-width: 3px;
 	border-color: purple;
 	padding: 10px;
+	margin: 0 auto;
 }
 
 .textInfo{
@@ -150,4 +148,18 @@ a {
 	display: flex;
 	margin: 0 auto;
 	padding-top: 20px;
+}
+
+/* for post-upload page */
+#post_upload_box {
+	min-height: 400px;
+	background-color: #b0e0e6;
+	justify-content: space-between;
+	line-height: 50px;
+	text-align: center;
+	font-family: Verdana;
+	margin:0 auto;
+	border-style: solid;
+	border-width: 5px;
+	width: 60%;
 }
