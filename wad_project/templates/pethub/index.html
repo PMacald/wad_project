@@ -16,25 +16,37 @@
 		{% for post in post_list %}
 			
 				<div class="post_container">
-					<h3>{{post.title}}</h3><br />
-					{% if post.picture %}
-						<img width="200px" height="auto" src="{{ MEDIA_URL }}{{post.picture}}">
-					{% endif %}
-
-					<p class="post_info_text">{{post.description}} - posted by <a href="{% url 'user_profile' %}{{ post.user.username }}">{{post.user.username}}</a> at {{post.upload_date}}</p><br />
-					<p class="post_tags">Tags: 
-					{% for tag in tag_list %}
-						{{ tag }}
-					{% endfor %}
-					</p>
-
-					<strong class="post_likes">{{post.likes}}</strong> people like this post
+					<div class="post_title">
+					<h3>{{post.title}}</h3>
+					</div>
 					
+					{% if post.picture %}
+						<div class="post_image">	
+						<img width="200px" height="auto" src="{{ MEDIA_URL }}{{post.picture}}" alt="Post image">
+						</div>
+					{% endif %}
+					
+					<div class="post_description"/>
+						<p>{{post.description}} - posted by <a href="{% url 'user_profile' %}{{ post.user.username }}">{{post.user.username}}</a> at {{post.upload_date}}</p>
+					</div>
+					
+					<div class="post_tags"/>
+						<p>Tags: 
+						{% for tag in tag_list %}
+							{{ tag }}
+						{% endfor %}
+						</p>
+					</div>
+					<div class="post_likes"/>
+						<p>
+						<strong class="post_likes">{{post.likes}}</strong> people like this post
+						</p>
+					</div>
 					{% if user.is_authenticated %}
-						<!--<button class="likes" data-postid="{{post.id}}"
-							class="like-button" types="button">
+						<button class="likes" 
+							class="like_button" types="button">
 							Like
-						</button>-->
+						</button>
 					{% endif %}
 
 				</div>

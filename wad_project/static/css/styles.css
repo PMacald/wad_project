@@ -114,30 +114,26 @@ a {
 
 /* Styles for user profiles */
 #photoFrame {
-	float: left;
-	margin: 20px auto;
 	border-style: solid;
 	border-width: 3px;
 	border-color: purple;
+	float: left;
 }
 
 #photoFrame img {
 	width: 200px;
 	height: 200px;
+	
 }
 
 #infoFrame {
-	width: 70%;
 	border-style: solid;
 	border-width: 3px;
 	border-color: purple;
-	padding: 10px;
+	width: 60%;
 	margin: 0 auto;
 }
 
-.textInfo{
-	clear: both;
-}
 
 /* for feed pages */
 .post_container {
@@ -145,17 +141,40 @@ a {
 	border-style: solid;
 	border-width: 2px;
 	border-color: purple;
-	display: flex;
 	margin: 0 auto;
-	padding-top: 20px;
+	padding-left: 5px;
+	padding-bottom: 5px;
 }
+
+.post_title h3{
+	
+}
+
+.post_image img {
+	border-style: solid;
+	border-width: 2px;
+	border-color: purple;
+}
+
+.post_description {
+	
+}
+
+.post_tags {
+	
+}
+
+.post_likes {
+	
+}
+
 
 /* for post-upload page */
 #post_upload_box {
 	min-height: 400px;
 	background-color: #b0e0e6;
 	justify-content: space-between;
-	line-height: 50px;
+	line-height: 20px;
 	text-align: center;
 	font-family: Verdana;
 	margin:0 auto;
