@@ -98,15 +98,30 @@ def user_login(request):
 
                 # show registration was successful
                 registered = True
-                login(request)
+                
             else:
                 # form was invalid, print error message
                 print(user_form.errors, profile_form.errors)
 
         # for users that want to be signed in instead
         elif request.POST.get('submit') == "Log in":
-            login(request)
-            
+            username = request.POST.get('username')
+            password = request.POST.get('password')
+
+            #authenticate username and password
+            user = authenticate(username=username,password=password)
+
+            # If credentials are valid
+            if user:
+                if user.is_active:
+                    login(request,user)
+                    return redirect(reverse('index'))
+                else:
+                    # Account is disabled, so user cannot log in
+                    return HttpResponse("Your account is disabled.")
+            else:
+                print("Invalid login details: {0}, {1}".format(username, password))
+                return HttpResponse("Invalid login details - please try again.")
 
     ####################################################################################
     # May need to edit to suit both forms        
@@ -175,6 +190,8 @@ def user_logout(request):
     return HttpResponseRedirect(reverse('login'))
 
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
 @login_required
 def like_post(request):
     post_id = None
@@ -208,3 +225,4 @@ def login(request):
         print("Invalid login details: {0}, {1}".format(username, password))
         return HttpResponse("Invalid login details - please try again.")
 >>>>>>> 1ff90bccde282c1f69d5cca7e707fc59b16aa723
+>>>>>>> c7aadbeb09e82d89f234a42ded826041774db35c
