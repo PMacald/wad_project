@@ -12,30 +12,32 @@
 		<h1>Welcome to PetHub, {{ user.username }}!</h1>
 	{% endif %}
 
-	{% for post in post_list %}
-		
-			<div class="post_container">
-				<h3>{{post.title}}</h3><br />
-				{% if post.picture %}
-					<img width="200px" height="auto" src="{{ MEDIA_URL }}{{post.picture}}">
-				{% endif %}
+	{% if post_list %}
+		{% for post in post_list %}
+			
+				<div class="post_container">
+					<h3>{{post.title}}</h3><br />
+					{% if post.picture %}
+						<img width="200px" height="auto" src="{{ MEDIA_URL }}{{post.picture}}">
+					{% endif %}
 
-				<p class="post_info_text">{{post.description}} - posted by <a href="{% url 'user_profile' %}{{ post.user.username }}">{{post.user.username}}</a> at {{post.upload_date}}</p><br />
-				<p class="post_tags">Tags: 
-				{% for tag in tag_list %}
-					{{ tag }}
-				{% endfor %}
-				</p>
+					<p class="post_info_text">{{post.description}} - posted by <a href="{% url 'user_profile' %}{{ post.user.username }}">{{post.user.username}}</a> at {{post.upload_date}}</p><br />
+					<p class="post_tags">Tags: 
+					{% for tag in tag_list %}
+						{{ tag }}
+					{% endfor %}
+					</p>
 
-				<strong class="post_likes">{{post.likes}}</strong> people like this post
-				
-				{% if user.is_authenticated %}
-					<!--<button class="likes" data-postid="{{post.id}}"
-						class="like-button" types="button">
-						Like
-					</button>-->
-				{% endif %}
+					<strong class="post_likes">{{post.likes}}</strong> people like this post
+					
+					{% if user.is_authenticated %}
+						<!--<button class="likes" data-postid="{{post.id}}"
+							class="like-button" types="button">
+							Like
+						</button>-->
+					{% endif %}
 
-			</div>
-	{% endfor %}
+				</div>
+		{% endfor %}
+	{% endif %}
 {% endblock %}
