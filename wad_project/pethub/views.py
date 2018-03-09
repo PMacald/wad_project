@@ -14,10 +14,9 @@ from pethub.models import UserProfile, User, Post
 @login_required
 def index(request):
     post_list = Post.objects.order_by('-upload_date')
-    user_list = User.objects.order_by('last_name')
+    
     # Get response early so we can gather cookie info
-    response = render(request, 'pethub/index.html', {'user_list' : user_list,
-                                                     'post_list' : post_list})
+    response = render(request, 'pethub/index.html', {'post_list' : post_list})
     #Get response for client and return it (updating cookies if need be) 
     return response
 
@@ -30,8 +29,10 @@ def about_us(request):
 
 @login_required
 def trending(request):
+    post_list = Post.objects.order_by('likes')
+    
     # Get response early so we can gather cookie info
-    response = render(request, 'pethub/trending.html')
+    response = render(request, 'pethub/trending.html', {'post_list' : post_list})
     #Get response for client and return it (updating cookies if need be) 
     return response
 

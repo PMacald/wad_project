@@ -6,10 +6,47 @@
 {% endblock %}
 
 {% block body_block %}
-<h1>This is the trending page.</h1>
-<div>
+<h1>Trending</h1>
+	{% if post_list %}
+		{% for post in post_list %}
+			
+				<div class="post_container">
+					<div class="post_title">
+					<h3>{{post.title}}</h3>
+					</div>
+					
+					{% if post.picture %}
+						<div class="post_image">	
+						<img width="200px" height="auto" src="{{ MEDIA_URL }}{{post.picture}}" alt="Post image">
+						</div>
+					{% endif %}
+					
+					<div class="post_description"/>
+						<p>{{post.description}} - posted by <a href="{% url 'user_profile' %}{{ post.user.username }}">{{post.user.username}}</a> at {{post.upload_date}}</p>
+					</div>
+					
+					<div class="post_tags"/>
+						<p>Tags: 
+						{% for tag in tag_list %}
+							{{ tag }}
+						{% endfor %}
+						</p>
+					</div>
+					<div class="post_likes"/>
+						<p>
+						<strong class="post_likes">{{post.likes}}</strong> people like this post
+						</p>
+					</div>
+					{% if user.is_authenticated %}
+						<button class="likes" 
+							class="like_button" types="button">
+							Like
+						</button>
+					{% endif %}
 
-</div>
+				</div>
+		{% endfor %}
+	{% endif %}
 
 
 

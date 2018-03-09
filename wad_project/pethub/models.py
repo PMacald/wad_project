@@ -31,7 +31,7 @@ class Post(models.Model):
     picture = models.ImageField(upload_to="post_images",blank=True)
     upload_date = models.DateTimeField(auto_now_add=True)
     tags = models.CharField(max_length=100, default="")
-
+    
     # Declare link to user model
     user = models.ForeignKey(User, null=True)
 

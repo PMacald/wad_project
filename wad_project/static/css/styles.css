@@ -54,13 +54,14 @@ a {
 #bottomBarContainer {
 	display: flex;
 	justify-content: space-between; 
-	bottom: 0;
+	
 	clear: both;
 }
 
 #bottomBarContainer div{
 	display: inline-block;
 	margin: 0 auto;
+	
 }
 
 /*Implementations on species.html*/
@@ -144,6 +145,7 @@ a {
 	margin: 0 auto;
 	padding-left: 5px;
 	padding-bottom: 5px;
+	margin-bottom: 10px;
 }
 
 .post_title h3{
@@ -181,4 +183,12 @@ a {
 	border-style: solid;
 	border-width: 5px;
 	width: 60%;
+}
+
+
+
+
+.image_icon{
+	width: 100px;
+	height: auto;
 }
