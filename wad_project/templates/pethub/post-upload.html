@@ -7,22 +7,22 @@
 
 {% block body_block %}
 
-	<div id="post_upload_box">
+<div id="post_upload_box">
 
-		<div >
-			<br />
-			<strong>Upload a Post Here!</strong>
-			<form id="post_upload_form" method="post" action="{% url 'post-upload' %}"
+	<div >
+		<br />
+		<strong>Upload a Post Here!</strong>
+		<form id="post_upload_form" method="post" action="{% url 'post-upload' %}"
 				enctype="multipart/form-data">
 
 			{% csrf_token %}
 
-				<!-- Display forms -->
+			<!-- Display forms -->
 			{{ post_form.as_p }}
 
-				<!-- button to submit form -->
-				<input type="submit" name="submit" value="Upload" />
-			</form>
-		</div>
+			<!-- button to submit form -->
+			<input type="submit" name="submit" value="Upload" />
+		</form>
 	</div>
+</div>
 {% endblock %}

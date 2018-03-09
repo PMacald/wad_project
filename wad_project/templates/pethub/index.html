@@ -6,48 +6,36 @@
 {% endblock %}
 
 {% block body_block %}
-{% if user.first_name %}
-<h1>Welcome to PetHub, {{ user.first_name }}!</h1>
-{% else %}
-<h1>Welcome to PetHub, {{ user.username }}!</h1>
-{% endif %}
-{% if user_list %}
-	{% for person in user_list %}
-		<a href="{% url 'user_profile' %}{{ person.username }}">{{person.username}}'s Profile</a><br />
-	{% endfor %}
+	{% if user.first_name %}
+		<h1>Welcome to PetHub, {{ user.first_name }}!</h1>
+	{% else %}
+		<h1>Welcome to PetHub, {{ user.username }}!</h1>
+	{% endif %}
+
 	{% for post in post_list %}
 		
 			<div class="post_container">
 				<h3>{{post.title}}</h3><br />
 				{% if post.picture %}
-					<img width="auto" height="200px" src="{{ MEDIA_URL }}{{post.picture}}">
+					<img width="200px" height="auto" src="{{ MEDIA_URL }}{{post.picture}}">
 				{% endif %}
-				
-<<<<<<< HEAD
+
 				<p class="post_info_text">{{post.description}} - posted by <a href="{% url 'user_profile' %}{{ post.user.username }}">{{post.user.username}}</a> at {{post.upload_date}}</p><br />
 				<p class="post_tags">Tags: 
 				{% for tag in tag_list %}
 					{{ tag }}
 				{% endfor %}
 				</p>
-=======
-<<<<<<< HEAD
-				<p>{{post.description}} - posted by {{post.user.username}} at {{post.upload_date}}</p><br />
-				<strong id="like">{{post.likes}}</strong> people like this post
+
+				<strong class="post_likes">{{post.likes}}</strong> people like this post
+				
 				{% if user.is_authenticated %}
-					<button id="likes" data-postid="{{post.id}}"
-						class="btn btn-primary btn-sm" types="button">
+					<!--<button class="likes" data-postid="{{post.id}}"
+						class="like-button" types="button">
 						Like
-					</button>
+					</button>-->
 				{% endif %}
-=======
-				<p>{{post.description}} - posted by <a href="{% url 'user_profile' %}{{ post.user.username }}">{{post.user.username}}</a> at {{post.upload_date}}</p><br />
->>>>>>> 1ff90bccde282c1f69d5cca7e707fc59b16aa723
->>>>>>> c7aadbeb09e82d89f234a42ded826041774db35c
+
 			</div>
 	{% endfor %}
-{% endif %}
-
-
-
 {% endblock %}
