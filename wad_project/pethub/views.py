@@ -154,7 +154,7 @@ def post_upload(request):
                 post = post_form.save()
 
                 #########################################################
-                post.user_profile = request.user.ge
+                post.user = User.objects.get(User = request.user)
 
                 
                 post.save()
