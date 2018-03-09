@@ -32,7 +32,7 @@ class Post(models.Model):
     upload_date = models.DateTimeField(auto_now_add=True)
 
     ######################################################################
-    user = models.ForeignKey("User", default=0)
+    user = models.ForeignKey(User, null=True)
 
     def __str__(self):
         return self.title
