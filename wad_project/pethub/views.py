@@ -188,3 +188,17 @@ def post_upload(request):
 def user_logout(request):
     logout(request)
     return HttpResponseRedirect(reverse('login'))
+
+@login_required
+def like_post(request):
+    post_id = None
+    if request.method == 'GET':
+        post_id = request.GET['posts_id']
+        likes = 0
+        if post_id:
+            post = Post.objects.get(id=int(post_id))
+            if post:
+                likes = post.likes + 1
+                post.likes = likes
+                post.save()
+    return HttpResponse(likes)

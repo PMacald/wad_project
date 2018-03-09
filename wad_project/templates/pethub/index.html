@@ -24,6 +24,13 @@
 				{% endif %}
 				
 				<p>{{post.description}} - posted by {{post.user.username}} at {{post.upload_date}}</p><br />
+				<strong id="like">{{post.likes}}</strong> people like this post
+				{% if user.is_authenticated %}
+					<button id="likes" data-postid="{{post.id}}"
+						class="btn btn-primary btn-sm" types="button">
+						Like
+					</button>
+				{% endif %}
 			</div>
 	{% endfor %}
 {% endif %}
