@@ -29,7 +29,7 @@ def about_us(request):
 
 @login_required
 def trending(request):
-    post_list = Post.objects.order_by('likes')
+    post_list = Post.objects.order_by('-likes')
     
     # Get response early so we can gather cookie info
     response = render(request, 'pethub/trending.html', {'post_list' : post_list})
@@ -157,7 +157,7 @@ def post_upload(request):
                 post = post_form.save()
 
                 # save associated user
-                post.user = User.objects.get(username=request.user.username)
+                post.user = request.user
 
                 # Save post information
                 post.save()

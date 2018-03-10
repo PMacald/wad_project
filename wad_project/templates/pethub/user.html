@@ -8,7 +8,8 @@
 {% block body_block %}
 <div id="mainBody">
 	<div id="photoFrame">
-		{% if userProfile.userPicture %}
+		<!-- check user is currently the one logged in -->
+		{% if user == request.user %}
 		<img width="200" height="200" src="{{ MEDIA_URL }}{{userProfile.userPicture}}" alt="{{user.username}}'s profile picture"/>
 		{% else %}
 		<img width="200" height="200" src="{% static 'images/user_profile/NoImageAvailable.png' %}" alt="{{user.username}}'s profile picture"/>
@@ -20,7 +21,7 @@
 		
 		<p>{{userProfile.bio}}</p>
 		
-		{% if user.is_authenticated %}
+		{% if user == request.user %}
 			<form action="{% url 'update-user' %}">
 				<input type="submit" value="Update Profile" />
 			</form>
