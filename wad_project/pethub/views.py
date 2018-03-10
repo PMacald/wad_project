@@ -99,7 +99,9 @@ def user_login(request):
 
                 # show registration was successful
                 registered = True
-                
+                login(request, user)
+                return redirect(reverse('index'))
+        
             else:
                 # form was invalid, print error message
                 print(user_form.errors, profile_form.errors)
@@ -217,9 +219,14 @@ def update_user(request):
             #change picture if a new one is uploaded
             if 'userPicture' in request.FILES:
                 profile.userPicture = request.FILES['userPicture']
+            else:
+                profile.userPicture = None
+                
             profile.save()
 
             updated = True
+            login(request, user)
+            
         else:
             # form was invalid, print error message
             print(user_form.errors, profile_form.errors)
@@ -228,7 +235,8 @@ def update_user(request):
         update_user_profile_form = UpdateUserProfileForm
         
     return render(request, 'pethub/update-user.html', {'update_user_profile_form' : update_user_profile_form,
-                                                       'update_user_form': update_user_form})
+                                                       'update_user_form': update_user_form,
+                                                       'updated': updated})
     
 
 
