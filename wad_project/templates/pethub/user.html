@@ -19,7 +19,12 @@
 		<h2>{{user.first_name}} {{user.last_name}}</h2>
 		
 		<p>{{userProfile.bio}}</p>
-
+		
+		{% if user.is_authenticated %}
+			<form action="{% url 'update-user' %}">
+				<input type="submit" value="Update Profile" />
+			</form>
+		{% endif %}
 
 	</div>
 </div>

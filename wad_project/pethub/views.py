@@ -6,7 +6,7 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from datetime import datetime
 from django import forms
-from pethub.forms import UserForm, UserProfileForm, PostForm
+from pethub.forms import UserForm, UserProfileForm, PostForm, UpdateUserForm, UpdateUserProfileForm
 from django.shortcuts import redirect
 from pethub.models import UserProfile, User, Post
 # Create your views here.
@@ -189,5 +189,46 @@ def post_upload(request):
 def user_logout(request):
     logout(request)
     return HttpResponseRedirect(reverse('login'))
+
+#view for updating user profile
+@login_required
+def update_user(request):
+    updated = False
+    user = request.user
+    profile = UserProfile.objects.get(user=user)
+
+    #If a post, make new forms for updating old objects
+    if request.method == 'POST':
+        update_user_profile_form = UpdateUserProfileForm(request.POST, instance=profile)
+        update_user_form = UpdateUserForm(request.POST, instance=user)
+
+        # Check both forms are valid
+        if update_user_form.is_valid() and update_user_profile_form.is_valid():
+            
+            #update user model with new information and save it
+            user = update_user_form.save()
+            user.set_password(user.password)
+            user.save()
+
+            # Update associated profile for user and save
+            profile = update_user_profile_form.save(commit=False)
+            profile.save()
+
+            #change picture if a new one is uploaded
+            if 'userPicture' in request.FILES:
+                profile.userPicture = request.FILES['userPicture']
+            profile.save()
+
+            updated = True
+        else:
+            # form was invalid, print error message
+            print(user_form.errors, profile_form.errors)
+    else:
+        update_user_form = UpdateUserForm()
+        update_user_profile_form = UpdateUserProfileForm
+        
+    return render(request, 'pethub/update-user.html', {'update_user_profile_form' : update_user_profile_form,
+                                                       'update_user_form': update_user_form})
+    
 
 
