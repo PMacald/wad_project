@@ -8,7 +8,7 @@ from datetime import datetime
 from django import forms
 from pethub.forms import UserForm, UserProfileForm, PostForm, UpdateUserForm, UpdateUserProfileForm
 from django.shortcuts import redirect
-from pethub.models import UserProfile, User, Post
+from pethub.models import UserProfile, User, Post, Comment
 # Create your views here.
 
 @login_required

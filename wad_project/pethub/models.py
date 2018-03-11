@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 from django.db import models
 from django.contrib.auth.models import User
 from datetime import datetime
-
+import uuid
 # Create your models here.
 
 #Model for user profiles on PetHub
@@ -25,6 +25,7 @@ class UserProfile(models.Model):
 
 class Post(models.Model):
     #Needs unique identifier and tags incorporated
+    post_id = models.UUIDField(unique=True, primary_key=True, default=uuid.uuid4, editable=False)
     title = models.CharField(max_length=100, default="")
     likes = models.IntegerField(default=0)
     description = models.CharField(max_length=300,default="")
@@ -36,8 +37,21 @@ class Post(models.Model):
     user = models.ForeignKey(User, null=True)
 
     def __str__(self):
-        return self.title
+        return str(self.post_id)
 
     #for unicode support of Python 2.x
     def __unicode__(self):
-        return self.title
+        return str(self.post_id)
+
+class Comment(models.Model):
+    comment_id = models.UUIDField(unique=True,primary_key=True, default=uuid.uuid4, editable=False)
+    comment_text = models.CharField(max_length=100, default="")
+    upload_date = models.DateTimeField(auto_now_add=True)
+    user = models.ForeignKey(User, null=True)
+    
+    def __str__(self):
+        return str(self.comment_id)
+
+    #for unicode support of Python 2.x
+    def __unicode__(self):
+        return str(self.comment_id)
