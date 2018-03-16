@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 {% load staticfiles %}
-<script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
-<script src="{% static 'js/pethub-jquery.js' %}"></script>
+
 
 
 <html>
@@ -14,7 +13,22 @@
 
 		{% endblock %}
 			</title>
+			
+			<style type="text/css">
+				div {
+					position: relative;
+				}
+			</style>
+			
 			<link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}" />
+			
+			<script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+			<script src="{% static 'js/pethub-jquery.js' %}"></script>
+			
+
+</script>
+
+			
 	</head>
 	<body>
 
@@ -69,5 +83,6 @@
 				</div>
 			{% endif %}
 			</div>
+			
 	</body>
 </html>

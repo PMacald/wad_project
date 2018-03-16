@@ -12,6 +12,7 @@ body {
 	left: 0;
 	border-style: solid;
 	border-width: 2px;
+	opacity: 1;
 }
 /*For descriptions on different pages - ensures consistency*/
 .PageDescriptor {
@@ -139,6 +140,7 @@ a {
 
 /* for feed pages */
 .post_container {
+	position: relative;
 	width: 70%;
 	border-style: solid;
 	border-width: 2px;
