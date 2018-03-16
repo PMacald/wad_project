@@ -240,5 +240,21 @@ def update_user(request):
                                                        'update_user_form': update_user_form,
                                                        'updated': updated})
     
-
-
+@login_required
+def like(request):
+    p_id = None
+    if request.method == 'GET':
+        p_id = request.GET['posts_id']
+        likes = 0
+    if p_id:
+        post = Post.objects.get(id=int(p_id))
+        if post:
+            likes = post.likes + 1
+            post.likes = likes
+            post.save()
+    return HttpResponse(likes)
+                
+@login_required
+def comment(request):
+    # boolean to show success of upload
+    uploaded = False
