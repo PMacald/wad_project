@@ -45,17 +45,15 @@
 					</div>
 					<div class="post_likes">
 						<p>
-						<strong class="post_likes">{{post.likes}}</strong> people like this post
+						<strong class="like_count" data-postid="{{post.id}}">{{post.likes}}</strong> people like this post
 						</p>
-					</div>
-					
-					{% if user.is_authenticated %}
-						<button class="likes" 
-							class="like_button" types="button">
-							Like
-						</button>
+						{% if user.is_authenticated %}
+							<button class="likes-button" data-postid="{{post.id}}"  
+								class="btn btn-primary btn-sm" type="button">
+								Like
+							</button>
 					{% endif %}
-					
+					</div>
 				</div>
 		{% endfor %}
 	{% endif %}
