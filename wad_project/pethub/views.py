@@ -154,14 +154,16 @@ def post_upload(request):
 
             if post_form.is_valid():
                 # save user info to the database
-                post = post_form.save()
+                post = post_form.save(commit=False)
 
                 # save associated user
                 post.user = request.user
 
                 # Save post information
                 post.save()
-                
+
+                #save many-to-many relationship for tags
+                post_form.save_m2m()
 
                 #If a post picture is provided, save it to the UserProfile model
                 if 'picture' in request.FILES:

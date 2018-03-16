@@ -27,35 +27,34 @@
 						</div>
 					{% endif %}
 					
-					<div class="post_description"/>
+					<div class="post_description">
 						<p>{{post.description}} - posted by <a href="{% url 'user_profile' %}{{ post.user.username }}">{{post.user.username}}</a> at {{post.upload_date}}</p>
 					</div>
 					
-					<div class="post_tags"/>
+					<div class="post_tags">
 						<p>Tags: 
-						{% if not tag_list %}
+						{% if not post.tags.all %}
 							No tags assigned
 						{% else %}
-							{% for tag in tag_list %}
-								
-								
-									{{ tag }}
+							{% for tag in post.tags.all %}
+									{{ tag.name }}
 							{% endfor %}
 						{% endif %}
 						</p>
 					</div>
-					<div class="post_likes"/>
+					<div class="post_likes">
 						<p>
 						<strong class="post_likes">{{post.likes}}</strong> people like this post
 						</p>
 					</div>
+					
 					{% if user.is_authenticated %}
 						<button class="likes" 
 							class="like_button" types="button">
 							Like
 						</button>
 					{% endif %}
-
+					
 				</div>
 		{% endfor %}
 	{% endif %}

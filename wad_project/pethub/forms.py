@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from pethub.models import UserProfile, Post
+from pethub.models import UserProfile, Post, Comment
 
 
 class UserForm(forms.ModelForm):
@@ -30,3 +30,8 @@ class UpdateUserForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ('username', 'first_name', 'last_name', 'password')
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ('comment_text',)

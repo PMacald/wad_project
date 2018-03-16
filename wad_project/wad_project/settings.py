@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'pethub',
+    'taggit',
 ]
 
 MIDDLEWARE = [
@@ -135,6 +136,8 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+TAGGIT_CASE_INSENSITIVE = True
 
 # URL for redirecting to login page
 LOGIN_URL = '/pethub/login/'
