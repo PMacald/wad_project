@@ -17,22 +17,22 @@
 
 	<div id="update_user_box" class="LoginPageBoxes">
 		{% if not updated %}
-			<strong>Update your profile</strong>
-			<form id="update_user_form" method="post" action="{% url 'update-user' %}"
+		<strong>Update your profile</strong>
+		<form id="update_user_form" method="post" action="{% url 'update-user' %}"
 				enctype="multipart/form-data">
 
-			
+
 			{% csrf_token %}
 
-				<!-- Display forms -->
+			<!-- Display forms -->
 			{{ update_user_form.as_p }}
 			{{ update_user_profile_form.as_p }}
 
-				<!-- button to submit form -->
-				<input type="submit" name="submit" value="Update" />
-			</form>
+			<!-- button to submit form -->
+			<input type="submit" name="submit" value="Update" />
+		</form>
 		{% else %}
-			<strong>Your profile has been updated, {{request.user.username}}!</strong>
+		<strong>Your profile has been updated, {{request.user.username}}!</strong>
 		{% endif %}
 	</div>
 </div>

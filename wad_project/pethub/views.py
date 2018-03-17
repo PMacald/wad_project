@@ -52,13 +52,51 @@ def species(request):
 
 @login_required
 def user_profile(request, username):
-    # create context dictionary holding user's name
+    # create context dictionary holding user's name and posts
     user = User.objects.get(username=username)
     userProfile = UserProfile.objects.get_or_create(user=user)[0]
+    userPosts = Post.objects.filter(user=user)
 
     context_dict = {'user' : user,
-                    'userProfile' : userProfile}
+                    'userProfile' : userProfile,
+                    'userPosts' : userPosts}
     return render(request, 'pethub/user.html', context_dict)
+
+@login_required
+def cat(request):
+    #Filter object based on tag
+    post_list = Post.objects.filter(tags__name__in=["cats", "cat", "kitten", "kitty", "feline", "catto", "kitties"]).order_by('-upload_date').distinct()
+    
+    response = render(request, 'pethub/cat.html', {'post_list' : post_list})
+    #Get response for client and return it (updating cookies if need be) 
+    return response
+
+@login_required
+def exotic(request):
+    #Filter object based on tag
+    post_list = Post.objects.filter(tags__name__in=["exotic", "lizard", "bird", "dragon", "fish", "parrot", "birds", "snake", "snakes"]).order_by('-upload_date').distinct()
+    
+    response = render(request, 'pethub/exotic-animal.html', {'post_list' : post_list})
+    #Get response for client and return it (updating cookies if need be) 
+    return response
+
+@login_required
+def dog(request):
+    #Filter object based on tag
+    post_list = Post.objects.filter(tags__name__in=["dog", "doggo", "dogs", "puppy", "pup", "pupper"]).order_by('-upload_date').distinct()
+    
+    response = render(request, 'pethub/dog.html', {'post_list' : post_list})
+    #Get response for client and return it (updating cookies if need be) 
+    return response
+
+@login_required
+def hutch_animal(request):
+    #Filter object based on tag
+    post_list = Post.objects.filter(tags__name__in=["hutch", "rabbit", "guinea", "hamster", "chinchilla", "guinea-pig", "mice", "mouse", "rabbits", "hamsters", "chinchillas"]).order_by('-upload_date')
+    
+    response = render(request, 'pethub/hutch.html', {'post_list' : post_list})
+    #Get response for client and return it (updating cookies if need be) 
+    return response
 
 def user_login(request):
     
@@ -174,7 +212,7 @@ def post_upload(request):
 
                 # show registration was successful
                 uploaded = True
-                
+            
             else:
                 # form was invalid, print error message
                 print(post_form.errors, post_form.errors)

@@ -7,12 +7,11 @@ body {
 #navbar {
 	background-color: #FF69B4;
 	width: 100%;
-	position: fixed;
-	top: 0;
 	left: 0;
+	top: 0;
 	border-style: solid;
 	border-width: 2px;
-	opacity: 1;
+	position: relative;
 }
 /*For descriptions on different pages - ensures consistency*/
 .PageDescriptor {
@@ -26,23 +25,13 @@ body {
 	margin: 0;
 }
 
-/*#navbar img {
-	float: left;
-	clear: left;
-}*/
-
-
 #navbarLinks {
   display: flex;
   justify-content: space-between;  
 }
 
-#navbarLinks div {
-	margin: 0 auto;
-}
-
 .main {
-    margin-top: 120px; /* Add a top margin to avoid content overlay */
+    margin-top: 30px; /* Add a top margin to avoid content overlay */
 
 }
 
@@ -55,14 +44,14 @@ a {
 #bottomBarContainer {
 	display: flex;
 	justify-content: space-between; 
-	
+
 	clear: both;
 }
 
 #bottomBarContainer div{
 	display: inline-block;
 	margin: 0 auto;
-	
+
 }
 
 /*Implementations on species.html*/
@@ -125,7 +114,7 @@ a {
 #photoFrame img {
 	width: 200px;
 	height: 200px;
-	
+
 }
 
 #infoFrame {
@@ -152,7 +141,7 @@ a {
 }
 
 .post_title h3{
-	
+
 }
 
 .post_image img {
@@ -162,15 +151,15 @@ a {
 }
 
 .post_description {
-	
+
 }
 
 .post_tags {
-	
+
 }
 
 .post_likes {
-	
+
 }
 
 
@@ -186,11 +175,12 @@ a {
 	border-style: solid;
 	border-width: 5px;
 	width: 60%;
+	padding: 20px;
 }
 
 
 
 
 .image_icon{
-	
+
 }

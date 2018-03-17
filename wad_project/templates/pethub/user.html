@@ -18,19 +18,67 @@
 	<div id="infoFrame">
 
 		<h2>{{user.first_name}} {{user.last_name}}</h2>
-		
+
 		<p>{{userProfile.bio}}</p>
-		
+
 		{% if user == request.user %}
-			<form action="{% url 'update-user' %}">
-				<input type="submit" value="Update Profile" />
-			</form>
+		<form action="{% url 'update-user' %}">
+			<input type="submit" value="Update Profile" />
+		</form>
 		{% endif %}
 
 	</div>
-</div>
+
+	{% if userPosts %}
+	<div id="historic_posts">
+		<h2>Historic Posts: </h2>
+		{% for post in userPosts %}
+		<div class="post_container">
+
+			<div class="post_title">
+				<h3>{{post.title}}</h3>
+			</div>
+
+					{% if post.picture %}
+			<div class="post_image">	
+				<img width="200px" height="auto" src="{{ MEDIA_URL }}{{post.picture}}" alt="Post image">
+				</div>
+					{% endif %}
 
 
+				<div class="post_description">
+					<p>{{post.description}} - posted by <a href="{% url 'user_profile' %}{{ post.user.username }}">{{post.user.username}}</a> at {{post.upload_date}}</p>
+				</div>
 
+				<div class="post_tags">
+					<p>Tags: 
+						{% if not post.tags.all %}
+							No tags assigned
+						{% else %}
+							{% for tag in post.tags.all %}
+									{{ tag.name }}
+							{% endfor %}
+						{% endif %}
+					</p>
+				</div>
+				<div class="post_likes">
+					<p>
+						<strong class="post_likes">{{post.likes}}</strong> people like this post
+					</p>
+				</div>
+
+					{% if user.is_authenticated %}
+				<button class="likes" 
+							class="like_button" types="button">
+							Like
+				</button>
+					{% endif %}
+
+			</div>
+		{% endfor %}
+		</div>
+	{% else %}
+		<h2>There are no historic posts by this user to show.</h2>
+	{% endif %}
 
 {% endblock %}

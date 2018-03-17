@@ -7,22 +7,29 @@
 
 {% block body_block %}
 
+
+
 <div id="post_upload_box">
+	{% if uploaded %}
+	<strong>Your post has been uploaded! Return to the main page here:</strong>
+</br>
+<a href="{% url 'index' %}">Home</a>
+	{% else %}
+<div >
+	<br />
+	<strong>Upload a Post Here!</strong>
+	<form id="post_upload_form" method="post" action="{% url 'post-upload' %}"
+					enctype="multipart/form-data">
 
-	<div >
-		<br />
-		<strong>Upload a Post Here!</strong>
-		<form id="post_upload_form" method="post" action="{% url 'post-upload' %}"
-				enctype="multipart/form-data">
+				{% csrf_token %}
 
-			{% csrf_token %}
+		<!-- Display forms -->
+				{{ post_form.as_p }}
 
-			<!-- Display forms -->
-			{{ post_form.as_p }}
-
-			<!-- button to submit form -->
-			<input type="submit" name="submit" value="Upload" />
-		</form>
-	</div>
+		<!-- button to submit form -->
+		<input type="submit" name="submit" value="Upload" />
+	</form>
+</div>
+	{% endif %}
 </div>
 {% endblock %}

@@ -6,17 +6,17 @@
 {% endblock %}
 
 {% block body_block %}
-	<!-- maybe include at a later date <img height="100px" src="{% static 'images/internal_use/logo_icon.png'%}" class="logo_image">-->
+<!-- maybe include at a later date <img height="100px" src="{% static 'images/internal_use/logo_icon.png'%}" class="logo_image">-->
 	{% if user.first_name %}
-		<h1>Welcome to PetHub, {{ user.first_name }}!</h1>
+<h1>This is the cat page, {{ user.first_name }}!</h1>
 	{% else %}
-		<h1>Welcome to PetHub, {{ user.username }}!</h1>
+<h1>This is the cat page, {{ user.username }}!</h1>
 	{% endif %}
 
 	{% if post_list %}
 		{% for post in post_list %}
-			
-				<div class="post_container">
+
+<div class="post_container">
 	<div class="post_title">
 		<h3>{{post.title}}</h3>
 	</div>
@@ -60,3 +60,4 @@
 		{% endfor %}
 	{% endif %}
 {% endblock %}
+	
