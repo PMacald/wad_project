@@ -41,6 +41,7 @@
 									{{ tag.name }}
 							{% endfor %}
 						{% endif %}
+<<<<<<< HEAD
 			</p>
 		</div>
 		<div class="post_likes">
@@ -57,6 +58,22 @@
 					{% endif %}
 
 	</div>
+
+						</p>
+					</div>
+					<div class="post_likes">
+						<p>
+						<strong class="like_count" data-postid="{{post.id}}">{{post.likes}}</strong> people like this post
+						</p>
+						{% if user.is_authenticated %}
+							<button class="likes-button" data-postid="{{post.id}}"  
+								class="btn btn-primary btn-sm" type="button">
+								Like
+							</button>
+					{% endif %}
+					</div>
+				</div>
+
 		{% endfor %}
 	{% endif %}
 {% endblock %}
