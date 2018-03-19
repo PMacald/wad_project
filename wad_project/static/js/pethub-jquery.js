@@ -9,7 +9,7 @@ $(document).ready(function() {
 		$(this).animate({left:'100px'});
 		$(this).css('borderColor', 'yellow');
 =======
-	
+
 	// Hide navbar on scroll
 	$(window).scroll(function() {
 		var i = $(window).scrollTop();
@@ -19,8 +19,8 @@ $(document).ready(function() {
 			$("#navbar").fadeIn("fast");
 		}
 	});
-	
-	
+
+
 	// Post container expand and light up on focus
 	$(".post_container").click(function() {
 		// Deactivate previous post
@@ -35,3 +35,4 @@ $(document).ready(function() {
 
 });
 
+														

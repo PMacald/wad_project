@@ -2,7 +2,7 @@
 {% load staticfiles %}
 
 {% block title_block %}
-	Home
+	Cats
 {% endblock %}
 
 {% block body_block %}
@@ -58,6 +58,9 @@
 
 	</div>
 		{% endfor %}
+	{% else %}
+		<h2>There are no posts to show here right now! 
+		Help us out by uploading a post with a cat tag!</h2>
 	{% endif %}
 {% endblock %}
 	

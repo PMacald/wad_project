@@ -94,7 +94,7 @@ def hutch_animal(request):
     #Filter object based on tag
     post_list = Post.objects.filter(tags__name__in=["hutch", "rabbit", "guinea", "hamster", "chinchilla", "guinea-pig", "mice", "mouse", "rabbits", "hamsters", "chinchillas"]).order_by('-upload_date')
     
-    response = render(request, 'pethub/hutch.html', {'post_list' : post_list})
+    response = render(request, 'pethub/hutch-animal.html', {'post_list' : post_list})
     #Get response for client and return it (updating cookies if need be) 
     return response
 
