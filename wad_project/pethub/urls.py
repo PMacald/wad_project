@@ -21,5 +21,5 @@ urlpatterns = [
     url(r'^extra-information/$',views.extra_information,name='extra-information'),
     url(r'^post-upload/$',views.post_upload,name='post-upload'),
     url(r'^update-user/$',views.update_user,name='update-user'),
-    #url(r'^like/$', views.like_post, name = 'like_post'),
+    url(r'^like/$', views.like, name = 'like_post'),
 ]

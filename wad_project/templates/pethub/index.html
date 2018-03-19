@@ -6,34 +6,34 @@
 {% endblock %}
 
 {% block body_block %}
-<!-- maybe include at a later date <img height="100px" src="{% static 'images/internal_use/logo_icon.png'%}" class="logo_image">-->
+	<!-- maybe include at a later date <img height="100px" src="{% static 'images/internal_use/logo_icon.png'%}" class="logo_image">-->
 	{% if user.first_name %}
-<h1>Welcome to PetHub, {{ user.first_name }}!</h1>
+		<h1>Welcome to PetHub, {{ user.first_name }}!</h1>
 	{% else %}
-<h1>Welcome to PetHub, {{ user.username }}!</h1>
+		<h1>Welcome to PetHub, {{ user.username }}!</h1>
 	{% endif %}
 
 	{% if post_list %}
 		{% for post in post_list %}
 
-<div class="post_container">
-	<div class="post_title">
-		<h3>{{post.title}}</h3>
-	</div>
+				<div class="post_container">
+					<div class="post_title">
+					<h3>{{post.title}}</h3>
+					</div>
 
 					{% if post.picture %}
-	<div class="post_image">	
-		<img width="200px" height="auto" src="{{ MEDIA_URL }}{{post.picture}}" alt="Post image">
-		</div>
+						<div class="post_image">
+						<img width="200px" height="auto" src="{{ MEDIA_URL }}{{post.picture}}" alt="Post image">
+						</div>
 					{% endif %}
 
 
-		<div class="post_description">
-			<p>{{post.description}} - posted by <a href="{% url 'user_profile' %}{{ post.user.username }}">{{post.user.username}}</a> at {{post.upload_date}}</p>
-		</div>
+					<div class="post_description">
+						<p>{{post.description}} - posted by <a href="{% url 'user_profile' %}{{ post.user.username }}">{{post.user.username}}</a> at {{post.upload_date}}</p>
+					</div>
 
-		<div class="post_tags">
-			<p>Tags: 
+					<div class="post_tags">
+						<p>Tags:
 						{% if not post.tags.all %}
 							No tags assigned
 						{% else %}
@@ -41,39 +41,22 @@
 									{{ tag.name }}
 							{% endfor %}
 						{% endif %}
-																	</p>
-																</div>
-																<div class="post_likes">
-																	<p>
-																		<strong class="post_likes">{{post.likes}}</strong> people like this post
-																	</p>
-																</div>
+						</p>
+					</div>
+					<div class="post_likes">
+						<p>
+						<strong class="like_count" data-postid="{{post.id}}">{{post.likes}}</strong> people like this post
+						</p>
+					</div>
 
 					{% if user.is_authenticated %}
-																<button class="likes" 
-							class="like_button" types="button">
+						<button class="likes-button" data-postid="{{post.id}}"
+							class="btn btn-primary btn-sm" type="button">
 							Like
-																</button>
+						</button>
 					{% endif %}
-
-															</div>
-
-														</p>
-													</div>
-													<!--<div class="post_likes">
-														<p>
-															<strong class="like_count" data-postid="{{post.id}}">{{post.likes}}</strong> people like this post
-														</p>
-						{% if user.is_authenticated %}
-														<button class="likes-button" data-postid="{{post.id}}"  
-								class="btn btn-primary btn-sm" type="button">
-								Like
-														</button>
-					{% endif %}
-													</div>-->
-
-
+					</div>
+				</div>
 		{% endfor %}
 	{% endif %}
 {% endblock %}
-													
