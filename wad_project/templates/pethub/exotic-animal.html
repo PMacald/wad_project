@@ -50,16 +50,16 @@
 		</div>
 
 					{% if user.is_authenticated %}
-						<button class="likes-button" data-postid="{{post.id}}"
+		<button class="likes-button" data-postid="{{post.id}}"
 							class="btn btn-primary btn-sm" type="button">
 							Like
-						</button>
+		</button>
 					{% endif %}
 
 	</div>
 		{% endfor %}
 	{% else %}
-		<h2>There are no posts to show here right now! 
+	<h2>There are no posts to show here right now! 
 		Help us out by uploading a post with an exotic animal tag!</h2>
 	{% endif %}
 {% endblock %}

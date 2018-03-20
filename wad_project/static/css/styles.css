@@ -24,7 +24,15 @@ body {
 	font-family: Verdana;
 	margin: 0;
 	color: #e80707;
-	
+
+}
+
+#logo {
+	height: 30px;
+	width: 30px;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 h1 {
@@ -134,11 +142,11 @@ a {
 	width: 60%;
 	margin: 0 auto;
 	padding: 20px;
-	
+
 }
 
 #historic_posts {
-	
+
 	margin-top: 5%;
 }
 
