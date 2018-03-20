@@ -15,16 +15,13 @@ body {
 	padding: 5px;
 }
 
-#searchbar {
-	float: right;
-	margin-left: 5px;
-	margin-right: 10px;
-}
+
 
 /*For descriptions on different pages - ensures consistency*/
 .PageDescriptor {
 	text-align: center;
 	font-family: Verdana;
+	color: #e80707;
 }
 
 #navbar h2 {
@@ -54,6 +51,7 @@ h1 {
   padding-right: 10px;  
 }
 
+
 .main {
     margin-top: 30px; /* Add a top margin to avoid content overlay */
 
@@ -64,6 +62,7 @@ a {
 	font-size: 20;
 	text-decoration: none;
 	color: #e80707;
+	font-weight: bolder;
 }
 
 #bottomBarContainer {
@@ -173,7 +172,8 @@ a {
 }
 
 .post_title h3{
-
+	text-decoration: underline;
+	color: #e80707;
 }
 
 .post_image img {
@@ -183,14 +183,17 @@ a {
 }
 
 .post_description {
-
+	font-family: Verdana;
+	font-size: 16;
 }
 
 .post_tags {
 
 }
 
-.post_likes {
+.user_post_options {
+	display: flex;
+  justify-content: space-between;
 
 }
 
