@@ -88,14 +88,15 @@ a {
 	display: inline-block;
 	margin: 0 auto;
 	text-align: center;
+	
 }
 
 #speciesContainer img {
 	width: 200px;
 	height: 200px;
-
+	border-radius: 25px;
 	border-style: solid;
-	border-width: 5px;
+	border-width: 3px;
 }
 
 /*for login/register page*/
@@ -110,6 +111,7 @@ a {
 	border-style: solid;
 	border-width: 5px;
 	width: 40%;
+	border-radius: 25px;
 }
 
 .LoginPageBoxes input {
@@ -131,15 +133,19 @@ a {
 #photoFrame {
 	border-style: solid;
 	border-width: 3px;
+	border-radius: 15px;
 	border-color: purple;
 	float: left;
 	margin-left: 20px;
+	margin-right: 20px;
+	width: 200px;
+	height: 200px;
 }
 
 #photoFrame img {
 	width: 200px;
 	height: 200px;
-
+	border-radius: 15px;
 }
 
 #infoFrame {
@@ -149,7 +155,7 @@ a {
 	width: 60%;
 	margin: 0 auto;
 	padding: 20px;
-
+	border-radius: 20px;
 }
 
 #historic_posts {
@@ -169,6 +175,7 @@ a {
 	padding-left: 5px;
 	padding-bottom: 5px;
 	margin-bottom: 10px;
+	border-radius: 15px;
 }
 
 .post_title h3{
@@ -186,6 +193,7 @@ a {
 	font-family: Verdana;
 	font-size: 16;
 }
+
 
 .post_tags {
 
@@ -211,6 +219,7 @@ a {
 	border-width: 5px;
 	width: 60%;
 	padding: 20px;
+	border-radius: 15px;
 }
 
 

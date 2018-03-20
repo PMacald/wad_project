@@ -8,9 +8,9 @@
 {% block body_block %}
 <!-- maybe include at a later date <img height="100px" src="{% static 'images/internal_use/logo_icon.png'%}" class="logo_image">-->
 	{% if user.first_name %}
-<h1>This is the search page, {{ user.first_name }}. You searched for {{search_term}}.</h1>
+<h1>This is the search page, {{ user.first_name }}. You searched for "{{search_term}}".</h1>
 	{% else %}
-<h1>This is the search page, {{ user.username }}. You searched for {{search_term}}.</h1>
+<h1>This is the search page, {{ user.username }}. You searched for "{{search_term}}".</h1>
 	{% endif %}
 
 	{% if post_list %}
