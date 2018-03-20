@@ -343,16 +343,11 @@ def add_comment(request):
                 # save associated user
                 comment.user = request.user
 
-                # Save post information
+                # Save comment information
                 comment.save()
 
-                #save many-to-many relationship for tags
-                comment_form.save_m2m()
 
-                # save post instance
-                post.save()
-
-                # show registration was successful
+                # show comment upload  was successful
                 uploaded = True
 
             else:
@@ -360,7 +355,6 @@ def add_comment(request):
                 print(comment_form.errors,comment_form.errors)
 
     else:
-        #not using POST methods, so make new models
         comment_form = CommentForm()
 
 

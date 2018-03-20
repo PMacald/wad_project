@@ -58,10 +58,9 @@
 					{% endif %}
 					</div>
 				</div>
-
-				<div class="comment">
-					<p>{{comment.comment_text}} - posted by <a href="{% url 'user_profile' %}{{ comment.user.username }}">{{comment.user.username}}</a> at {{comment.upload_date}}</p>
-				</div>
+					<div class="comment" data-postif="{{post.id}}">
+						<p>{{comment.comment_text}} - posted by <a href="{% url 'user_profile' %}{{ comment.user.username }}">{{comment.user.username}}</a> at {{comment.upload_date}}</p>
+					</div>
 		{% endfor %}
 	{% endif %}
 {% endblock %}
