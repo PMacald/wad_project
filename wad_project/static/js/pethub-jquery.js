@@ -3,11 +3,11 @@ $(document).ready(function() {
 
 
 	// Test code - turns p elements red on hover, then blue
-	$(".post_container").click(function() {
+	/*$(".post_container").click(function() {
 		//$(this).hide();
 
 		$(this).animate({left:'100px'});
-		$(this).css('borderColor', 'yellow');
+		$(this).css('borderColor', 'yellow');*/
 
 
 	// Hide navbar on scroll
@@ -29,10 +29,8 @@ $(document).ready(function() {
 
 		// Expand post		
 		$(this).animate({width:"80%"});
-		$(this).css({'borderColor': 'yellow', 'borderWidth': '5px'});
+		$(this).css({'borderColor': '#e80707', 'borderWidth': '5px'});
 
 	});
-
-});
 
 });
