@@ -11,14 +11,14 @@ $(document).ready(function() {
 
 
 	// Hide navbar on scroll
-	$(window).scroll(function() {
+	/*$(window).scroll(function() {
 		var i = $(window).scrollTop();
 		if (i >= 100) {
 			$("#navbar").fadeOut("fast");
 		} else {
 			$("#navbar").fadeIn("fast");
 		}
-	});
+	});*/
 
 
 	// Post container expand and light up on focus
