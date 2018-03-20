@@ -37,12 +37,7 @@
 				</br>
 				<!-- Include search bar for tags -->
 				
-				<div id="searchbar">
-					<form type="GET" action="{% url 'search' %}">
-					  <input placeholder="Search..." type="text" name="search_term">
-					  <button id="search_submit" type="submit" >Go</button>
-					</form>
-				</div>
+				
 				
 				
 				<div id="navbarLinks">
@@ -65,6 +60,12 @@
 					<div>
 						<a href="{% url 'extra-information'%}">Extra Information</a>
 					</div>
+					<div>
+					<form type="GET" action="{% url 'search' %}">
+					  <input placeholder="Search..." type="text" name="search_term">
+					  <button id="search_submit" type="submit" >Go</button>
+					</form>
+				</div>
 				</div>
 			</div>
 

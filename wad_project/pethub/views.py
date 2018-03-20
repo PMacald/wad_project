@@ -317,7 +317,12 @@ def search(request):
     return render(request, 'pethub/search.html', {'post_list' : post_list,
                                                   'search_term' : search_term})
     
-
+@login_required
+def delete_post(request, post_id):
+    post = Post.objects.get(id=post_id)
+    if post.user == request.user:
+        Post.objects.get(id=post_id).delete()
+    return user_profile(request, request.user.username)
     
 @login_required
 def comment(request):
