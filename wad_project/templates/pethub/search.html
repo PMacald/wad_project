@@ -1,0 +1,66 @@
+{% extends "pethub/base.html" %}
+{% load staticfiles %}
+
+{% block title_block %}
+	Dogs
+{% endblock %}
+
+{% block body_block %}
+<!-- maybe include at a later date <img height="100px" src="{% static 'images/internal_use/logo_icon.png'%}" class="logo_image">-->
+	{% if user.first_name %}
+<h1>This is the search page, {{ user.first_name }}. You searched for {{search_term}}.</h1>
+	{% else %}
+<h1>This is the search page, {{ user.username }}. You searched for {{search_term}}.</h1>
+	{% endif %}
+
+	{% if post_list %}
+		{% for post in post_list %}
+
+<div class="post_container">
+	<div class="post_title">
+		<h3>{{post.title}}</h3>
+	</div>
+
+					{% if post.picture %}
+	<div class="post_image">	
+		<img width="200px" height="auto" src="{{ MEDIA_URL }}{{post.picture}}" alt="Post image">
+		</div>
+					{% endif %}
+
+
+		<div class="post_description">
+			<p>{{post.description}} - posted by <a href="{% url 'user_profile' %}{{ post.user.username }}">{{post.user.username}}</a> at {{post.upload_date}}</p>
+		</div>
+
+		<div class="post_tags">
+			<p>Tags: 
+						{% if not post.tags.all %}
+							No tags assigned
+						{% else %}
+							{% for tag in post.tags.all %}
+									{{ tag.name }}
+							{% endfor %}
+						{% endif %}
+			</p>
+		</div>
+		<div class="post_likes">
+			<p>
+				<strong class="like_count" data-postid="{{post.id}}">{{post.likes}}</strong> people like this post
+			</p>
+		</div>
+
+					{% if user.is_authenticated %}
+		<button class="likes-button" data-postid="{{post.id}}"
+							class="btn btn-primary btn-sm" type="button">
+							Like
+		</button>
+					{% endif %}
+
+	</div>
+		{% endfor %}
+	{% else %}
+	<h2>There are no posts to show here right now! 
+		Help us out by uploading a post with a {{search_term}} tag!</h2>
+	{% endif %}
+{% endblock %}
+	

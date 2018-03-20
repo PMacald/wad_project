@@ -22,4 +22,5 @@ urlpatterns = [
     url(r'^post-upload/$',views.post_upload,name='post-upload'),
     url(r'^update-user/$',views.update_user,name='update-user'),
     url(r'^like/$', views.like, name = 'like_post'),
+    url(r'^search/$', views.search, name = 'search'),
 ]

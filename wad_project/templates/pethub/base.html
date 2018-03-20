@@ -29,11 +29,22 @@
 			<div id="navbar">
 				<a href="{% url 'index' %}">
 						<h2>PetHub</h2>
+				</a>
 					<!--<a href="{% url 'index' %}">
 				<img src="{% static 'images/homeimage.png' %}"
 				alt="Home button" height="30" width="30"/>
 			</a>-->
 				</br>
+				<!-- Include search bar for tags -->
+				
+				<div id="searchbar">
+					<form type="GET" action="{% url 'search' %}">
+					  <input placeholder="Search..." type="text" name="search_term">
+					  <button id="search_submit" type="submit" >Go</button>
+					</form>
+				</div>
+				
+				
 				<div id="navbarLinks">
 					<div>
 						<a href="{% url 'index'%}">Home</a>

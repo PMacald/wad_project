@@ -300,7 +300,25 @@ def like(request):
             post.likes = likes
             post.save()
     return HttpResponse(likes)
-                
+
+@login_required
+def search(request):
+
+    #Try and get data if get method used
+    if request.method == "GET":
+        # get term user searched for
+            search_term = request.GET.get("search_term", None)
+            print(search_term)
+
+    #filter posts based on search term
+    post_list = Post.objects.filter(tags__name__in=search_term.split()).order_by('-upload_date').distinct()
+
+    
+    return render(request, 'pethub/search.html', {'post_list' : post_list,
+                                                  'search_term' : search_term})
+    
+
+    
 @login_required
 def comment(request):
     # boolean to show success of upload

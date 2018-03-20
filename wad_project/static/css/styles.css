@@ -12,7 +12,15 @@ body {
 	border-style: solid;
 	border-width: 2px;
 	position: relative;
+	padding: 5px;
 }
+
+#searchbar {
+	float: right;
+	margin-left: 5px;
+	margin-right: 10px;
+}
+
 /*For descriptions on different pages - ensures consistency*/
 .PageDescriptor {
 	text-align: center;
@@ -147,7 +155,7 @@ a {
 
 #historic_posts {
 
-	margin-top: 5%;
+	margin-top: 8%;
 }
 
 
