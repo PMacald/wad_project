@@ -1,0 +1,35 @@
+{% extends "pethub/base.html" %}
+{% load staticfiles %}
+
+{% block title_block %}
+	Add a comment
+{% endblock %}
+
+{% block body_block %}
+
+
+
+<div id="add_comment_box">
+	{% if uploaded %}
+	<strong>Comment added. Return to the main page here:</strong>
+</br>
+<a href="{% url 'index' %}">Home</a>
+	{% else %}
+<div >
+	<br />
+	<strong>Add a Comment</strong>
+	<form id="add_comment_form" method="post" action="{% url 'add_comment' %}">
+    <textarea cols="50" rows="4" name="comment"></textarea>
+
+				{% csrf_token %}
+
+		<!-- Display forms -->
+				{{ post_form.as_p }}
+
+		<!-- button to submit form -->
+		<input type="submit" name="submit" value="Add Comment" />
+	</form>
+</div>
+	{% endif %}
+</div>
+{% endblock %}

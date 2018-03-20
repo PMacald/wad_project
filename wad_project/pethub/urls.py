@@ -24,4 +24,6 @@ urlpatterns = [
     url(r'^like/$', views.like, name = 'like_post'),
     url(r'^search/$', views.search, name = 'search'),
     url(r"^delete_post/(?P<post_id>\d+)/$", views.delete_post, name="delete_post"),
+    url(r'^add-comment/$', views.add_comment, name = 'add_comment'),
+
 ]
