@@ -287,9 +287,16 @@ def like(request):
         p_id = request.GET['posts_id']
         likes = 0
     if p_id:
+        # Fetch post for AJAX
         post = Post.objects.get(id=int(p_id))
         if post:
-            likes = post.likes + 1
+            #Check if user has liked the post before
+            if request.user in post.liked_users.all():
+                post.liked_users.remove(request.user)
+            else:
+                post.liked_users.add(request.user)
+            #Set likes count to number of liked users
+            likes = post.liked_users.count()
             post.likes = likes
             post.save()
     return HttpResponse(likes)
