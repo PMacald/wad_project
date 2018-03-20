@@ -54,6 +54,7 @@ class PetHubTests(TestCase):
 
     def test_post_cannot_have_negative_likes(self):
         test_post = Post(likes=-1)
+        print (test_post.likes)
         self.assertEqual((test_post.likes >= 0), True) #Currently this test fails, need to edit code elsewhere
 
     def test_can_have_post_with_historic_date(self):
@@ -61,7 +62,18 @@ class PetHubTests(TestCase):
         test_post = Post(upload_date = time)
         self.assertEqual((test_post.upload_date==timezone.now()), False)
 
-    def test_can_have_2_comments_with_same_text_on_post(self):
-        test_comment1 = Comment(comment_text = "Test")
-        test_comment2 = Comment(comment_text = "Test")
-        self.assertEqual(test_comment1==testcomment2, False)
+    def test_can_have_2_comments_with_same_text_on_post(self): 
+        test_post = Post()
+        test_comment1 = Comment(comment_text = "Test", post = test_post)
+        test_comment2 = Comment(comment_text = "Test", post = test_post)
+        self.assertEqual(test_comment1==test_comment2, False)
+
+    def test_UserProfile_can_have_blank_bio(self): 
+        test_user = UserProfile()
+        self.assertEqual(test_user.bio=="", True)
+
+    def test_comment_time_cannot_be_before_post_time(self): 
+        test_post = Post(upload_date = timezone.now())
+        test_comment = Comment(upload_date = (timezone.now() - datetime.timedelta(days=1)), post = test_post)
+        self.assertEqual(test_comment.upload_date==test_post.upload_date, True) #Currently this test fails, need to edit code elsewhere
+        
