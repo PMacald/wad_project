@@ -13,66 +13,6 @@
 <h1>This is the cat page, {{ user.username }}!</h1>
 	{% endif %}
 
-	{% if post_list %}
-		{% for post in post_list %}
-
-<div class="post_container">
-	<div class="post_title">
-		<h3>{{post.title}}</h3>
-	</div>
-
-					{% if post.picture %}
-	<div class="post_image">	
-		<img width="200px" height="auto" src="{{ MEDIA_URL }}{{post.picture}}" alt="Post image">
-		</div>
-					{% endif %}
-
-
-		<div class="post_description">
-			<p>{{post.description}} - posted by <a href="{% url 'user_profile' %}{{ post.user.username }}">{{post.user.username}}</a> at {{post.upload_date}}</p>
-		</div>
-
-		<div class="post_tags">
-			<p>Tags: 
-						{% if not post.tags.all %}
-							No tags assigned
-						{% else %}
-							{% for tag in post.tags.all %}
-									{{ tag.name }}
-							{% endfor %}
-						{% endif %}
-			</p>
-		</div>
-		<div class="comments_container">
-					<h3>Comments</h3>
-						{% if post.comments.all %}
-							{% for comment in post.comments.all %}
-								<p>{{comment.comment_text}} - posted by <a href="{% url 'user_profile' %}{{ comment.user.username }}">{{comment.user.username}}</a> at {{comment.upload_date}}</p></br>
-							{% endfor %}
-						{% else %}
-							<p>No comments to show.</p>
-						{% endif %}
-						<a class="button_link" href="{% url 'add_comment' %}{{ post.id }}">Add a comment</a>
-		</div>
-		<div class="post_likes">
-			<p>
-				<strong class="like_count" data-postid="{{post.id}}">{{post.likes}}</strong> people like this post
-			</p>
-		</div>
-
-					{% if user.is_authenticated %}
-		<button class="likes-button" data-postid="{{post.id}}"
-							class="btn btn-primary btn-sm" type="button">
-							Like
-		</button>
-						
-					{% endif %}
-
-	</div>
-		{% endfor %}
-	{% else %}
-	<h2>There are no posts to show here right now! 
-		Help us out by uploading a post with a cat tag!</h2>
-	{% endif %}
+	
 {% endblock %}
 	

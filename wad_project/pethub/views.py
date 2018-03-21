@@ -59,7 +59,7 @@ def user_profile(request, username):
 
     context_dict = {'user' : user,
                     'userProfile' : userProfile,
-                    'userPosts' : userPosts}
+                    'post_list' : userPosts}
     return render(request, 'pethub/user.html', context_dict)
 
 @login_required
