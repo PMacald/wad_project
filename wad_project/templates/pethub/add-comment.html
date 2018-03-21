@@ -2,29 +2,29 @@
 {% load staticfiles %}
 
 {% block title_block %}
-	Post Upload
+	Add a comment
 {% endblock %}
 
 {% block body_block %}
 
 
 
-<div id="post_upload_box">
+<div id="add_comment_box">
 	{% if uploaded %}
-	<strong>Your post has been uploaded! Return to the main page here:</strong>
+	<strong>Your comment has been added. Return to the main page here:</strong>
 </br>
 <a href="{% url 'index' %}">Home</a>
 	{% else %}
 <div >
 	<br />
-	<strong>Upload a Post Here!</strong>
-	<form id="post_upload_form" method="post" action="{% url 'post-upload' %}"
+	<strong>Add a Comment!</strong>
+	<form id="add_comment_form" method="post" action="{% url 'add_comment' %}"
 					enctype="multipart/form-data">
 
 				{% csrf_token %}
 
 		<!-- Display forms -->
-				{{ post_form.as_p }}
+				{{ comment_form.as_p }}
 
 		<!-- button to submit form -->
 		<input type="submit" name="submit" value="Upload" />

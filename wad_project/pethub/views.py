@@ -6,7 +6,7 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from datetime import datetime
 from django import forms
-from pethub.forms import UserForm, UserProfileForm, PostForm, UpdateUserForm, UpdateUserProfileForm
+from pethub.forms import UserForm, UserProfileForm, PostForm, UpdateUserForm, UpdateUserProfileForm, CommentForm
 from django.shortcuts import redirect
 from pethub.models import UserProfile, User, Post, Comment
 # Create your views here.
@@ -14,40 +14,40 @@ from pethub.models import UserProfile, User, Post, Comment
 @login_required
 def index(request):
     post_list = Post.objects.order_by('-upload_date')
-    
+
     # Get response early so we can gather cookie info
     response = render(request, 'pethub/index.html', {'post_list' : post_list})
-    #Get response for client and return it (updating cookies if need be) 
+    #Get response for client and return it (updating cookies if need be)
     return response
 
 @login_required
 def about_us(request):
     # Get response early so we can gather cookie info
     response = render(request, 'pethub/about-us.html')
-    #Get response for client and return it (updating cookies if need be) 
+    #Get response for client and return it (updating cookies if need be)
     return response
 
 @login_required
 def trending(request):
     post_list = Post.objects.order_by('-likes')
-    
+
     # Get response early so we can gather cookie info
     response = render(request, 'pethub/trending.html', {'post_list' : post_list})
-    #Get response for client and return it (updating cookies if need be) 
+    #Get response for client and return it (updating cookies if need be)
     return response
 
 @login_required
 def extra_information(request):
     # Get response early so we can gather cookie info
     response = render(request, 'pethub/extra-information.html')
-    #Get response for client and return it (updating cookies if need be) 
+    #Get response for client and return it (updating cookies if need be)
     return response
 
 @login_required
 def species(request):
     # Get response early so we can gather cookie info
     response = render(request, 'pethub/species.html')
-    #Get response for client and return it (updating cookies if need be) 
+    #Get response for client and return it (updating cookies if need be)
     return response
 
 @login_required
@@ -66,47 +66,47 @@ def user_profile(request, username):
 def cat(request):
     #Filter object based on tag
     post_list = Post.objects.filter(tags__name__in=["cats", "cat", "kitten", "kitty", "feline", "catto", "kitties"]).order_by('-upload_date').distinct()
-    
+
     response = render(request, 'pethub/cat.html', {'post_list' : post_list})
-    #Get response for client and return it (updating cookies if need be) 
+    #Get response for client and return it (updating cookies if need be)
     return response
 
 @login_required
 def exotic(request):
     #Filter object based on tag
     post_list = Post.objects.filter(tags__name__in=["exotic", "lizard", "bird", "dragon", "fish", "parrot", "birds", "snake", "snakes"]).order_by('-upload_date').distinct()
-    
+
     response = render(request, 'pethub/exotic-animal.html', {'post_list' : post_list})
-    #Get response for client and return it (updating cookies if need be) 
+    #Get response for client and return it (updating cookies if need be)
     return response
 
 @login_required
 def dog(request):
     #Filter object based on tag
     post_list = Post.objects.filter(tags__name__in=["dog", "doggo", "dogs", "puppy", "pup", "pupper"]).order_by('-upload_date').distinct()
-    
+
     response = render(request, 'pethub/dog.html', {'post_list' : post_list})
-    #Get response for client and return it (updating cookies if need be) 
+    #Get response for client and return it (updating cookies if need be)
     return response
 
 @login_required
 def hutch_animal(request):
     #Filter object based on tag
     post_list = Post.objects.filter(tags__name__in=["hutch", "rabbit", "guinea", "hamster", "chinchilla", "guinea-pig", "mice", "mouse", "rabbits", "hamsters", "chinchillas"]).order_by('-upload_date')
-    
+
     response = render(request, 'pethub/hutch-animal.html', {'post_list' : post_list})
-    #Get response for client and return it (updating cookies if need be) 
+    #Get response for client and return it (updating cookies if need be)
     return response
 
 def user_login(request):
-    
+
     # boolean to show success of registration
     registered = False
     user_form = UserForm()
     profile_form = UserProfileForm()
-    
 
-    
+
+
     #Try and get data if POST method used
     if request.method == "POST":
 
@@ -123,7 +123,7 @@ def user_login(request):
                 # hash password for user object
                 user.set_password(user.password)
                 user.save()
-                
+
                 #Sort out UserProfile instance, setting commit to false for the moment to avoid integrity issues
                 profile = profile_form.save(commit=False)
                 profile.user = user
@@ -168,13 +168,13 @@ def user_login(request):
                 
 
     ####################################################################################
-    # May need to edit to suit both forms        
-       
+    # May need to edit to suit both forms
+
     else:
-        #not using POST methods, so make new models 
+        #not using POST methods, so make new models
         user_form = UserForm()
         profile_form = UserProfileForm()
-    
+
     #Render template according to data received
     return render(request, 'pethub/login.html',
                       {'user_form': user_form,
@@ -191,7 +191,7 @@ def post_upload(request):
     if request.method == "POST":
         # fill in data from UserForm and UserProfileForm
             post_form = PostForm(data=request.POST)
-            
+
 
             if post_form.is_valid():
                 # save user info to the database
@@ -209,27 +209,27 @@ def post_upload(request):
                 #If a post picture is provided, save it to the UserProfile model
                 if 'picture' in request.FILES:
                     post.picture = request.FILES['picture']
-                
+
                 # save post instance
                 post.save()
 
                 # show registration was successful
                 uploaded = True
-            
+
             else:
                 # form was invalid, print error message
                 print(post_form.errors, post_form.errors)
 
     else:
-        #not using POST methods, so make new models 
+        #not using POST methods, so make new models
         post_form = PostForm()
-        
-    
+
+
     context_dict = {'post_form': post_form,
                        'uploaded': uploaded,}
     #Render template according to data received
     return render(request, 'pethub/post-upload.html', context_dict)
-    
+
 @login_required
 def user_logout(request):
     logout(request)
@@ -249,7 +249,7 @@ def update_user(request):
 
         # Check both forms are valid
         if update_user_form.is_valid() and update_user_profile_form.is_valid():
-            
+
             #update user model with new information and save it
             user = update_user_form.save()
             user.set_password(user.password)
@@ -264,23 +264,23 @@ def update_user(request):
                 profile.userPicture = request.FILES['userPicture']
             else:
                 profile.userPicture = None
-                
+
             profile.save()
 
             updated = True
             login(request, user)
-            
+
         else:
             # form was invalid, print error message
             print(user_form.errors, profile_form.errors)
     else:
         update_user_form = UpdateUserForm()
         update_user_profile_form = UpdateUserProfileForm
-        
+
     return render(request, 'pethub/update-user.html', {'update_user_profile_form' : update_user_profile_form,
                                                        'update_user_form': update_user_form,
                                                        'updated': updated})
-    
+
 
 
 @login_required
@@ -316,18 +316,54 @@ def search(request):
     #filter posts based on search term
     post_list = Post.objects.filter(tags__name__in=search_term.split()).order_by('-upload_date').distinct()
 
-    
+
     return render(request, 'pethub/search.html', {'post_list' : post_list,
                                                   'search_term' : search_term})
-    
+
 @login_required
 def delete_post(request, post_id):
     post = Post.objects.get(id=post_id)
     if post.user == request.user:
         Post.objects.get(id=post_id).delete()
     return user_profile(request, request.user.username)
-    
+
 @login_required
-def comment(request):
+def add_comment(request):
     # boolean to show success of upload
     uploaded = False
+
+
+    #Try and get data if POST method used
+    if request.method == "POST":
+        # fill in data from UserForm and UserProfileForm
+            comment_form = CommentForm(data=request.POST)
+
+
+            if comment_form.is_valid():
+                # save user info to the database
+                comment = comment_form.save(commit=False)
+
+                # save associated user
+                comment.user = request.user
+
+                comment.post = request.post
+
+                # Save comment information
+                comment.save()
+
+
+                # show comment upload  was successful
+                uploaded = True
+
+            else:
+                # form was invalid, print error message
+                print(comment_form.errors,comment_form.errors)
+
+    else:
+        comment_form = CommentForm()
+
+
+    context_dict = {'comment_form': comment_form,
+                       'uploaded': uploaded,}
+    #Render template according to data received
+    return render(request, 'pethub/add-comment.html', context_dict)

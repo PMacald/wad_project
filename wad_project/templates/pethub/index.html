@@ -48,14 +48,20 @@
 						<strong class="like_count" data-postid="{{post.id}}">{{post.likes}}</strong> people like this post
 						</p>
 					</div>
-
 					{% if user.is_authenticated %}
 						<button class="likes-button" data-postid="{{post.id}}"
 							class="btn btn-primary btn-sm" type="button">
 							Like
 						</button>
+						<a href="{% url 'add_comment' %}">Add a comment</a>
+
 					{% endif %}
 					</div>
+				</div>
+
+				<!--<div class="comment" data-postid="{{post.id}}">-->
+					<strong><a href="{% url 'user_profile' %}{{ comment.user.username }}">{{comment.user.username}}</a></strong>
+					<p>{{ comment.comment_text }}</p>
 				</div>
 		{% endfor %}
 	{% endif %}
