@@ -20,7 +20,7 @@ $(document).ready(function() {
 		}
 	});*/
 	
-	// Link highlights on hover
+	// -- Link highlights on hover --
 	$("a").hover(function() {
 		$(this).toggleClass('selected');
 		
@@ -44,14 +44,14 @@ $(document).ready(function() {
 		url = 'index.html';
 	}
 	
-	//$('#navbar a').each(function() {
-		//alert(this).href;
-		
-		//if (file_name == href) {
-			//$(this).addClass('selected');
-		//}
-	//});
+	// 
+	$('#navbarLinks a').each(function() {
+		if (url == this.href) {
+			$(this).addClass('activePage');
+		}
+	});
 	
+	// --
 	
 	// Post container expand and light up on focus
 	$(".post_container").click(function() {
