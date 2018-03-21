@@ -53,14 +53,16 @@
 							class="btn btn-primary btn-sm" type="button">
 							Like
 						</button>
-						<a href="{% url 'add_comment'%}">Add a comment</a>
+						<a href="{% url 'add_comment' %}">Add a comment</a>
 
 					{% endif %}
 					</div>
 				</div>
-					<div class="comment" data-postif="{{post.id}}">
-						<p>{{comment.comment_text}} - posted by <a href="{% url 'user_profile' %}{{ comment.user.username }}">{{comment.user.username}}</a> at {{comment.upload_date}}</p>
-					</div>
+
+				<!--<div class="comment" data-postid="{{post.id}}">-->
+					<strong><a href="{% url 'user_profile' %}{{ comment.user.username }}">{{comment.user.username}}</a></strong>
+					<p>{{ comment.comment_text }}</p>
+				</div>
 		{% endfor %}
 	{% endif %}
 {% endblock %}

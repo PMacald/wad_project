@@ -11,20 +11,23 @@
 
 <div id="add_comment_box">
 	{% if uploaded %}
-	<strong>Comment added. Return to the main page here:</strong>
+	<strong>Your comment has been added. Return to the main page here:</strong>
 </br>
 <a href="{% url 'index' %}">Home</a>
 	{% else %}
 <div >
 	<br />
-	<strong>Add a Comment</strong>
-	<form id="add_comment_form" method="post" action="{% url 'add_comment' %}">
-    <textarea cols="50" rows="4" name="comment"></textarea>
+	<strong>Add a Comment!</strong>
+	<form id="add_comment_form" method="post" action="{% url 'add_comment' %}"
+					enctype="multipart/form-data">
 
 				{% csrf_token %}
 
+		<!-- Display forms -->
+				{{ comment_form.as_p }}
+
 		<!-- button to submit form -->
-		<input type="submit" name="submit" value="Add Comment" />
+		<input type="submit" name="submit" value="Upload" />
 	</form>
 </div>
 	{% endif %}

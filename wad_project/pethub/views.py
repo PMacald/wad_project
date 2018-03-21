@@ -343,6 +343,8 @@ def add_comment(request):
                 # save associated user
                 comment.user = request.user
 
+                comment.post = request.post
+
                 # Save comment information
                 comment.save()
 
