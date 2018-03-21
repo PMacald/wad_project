@@ -26,4 +26,6 @@ urlpatterns = [
     url(r'^delete_post/(?P<post_id>\d+)/$', views.delete_post, name="delete_post"),
     url(r'^add-comment/$', views.add_comment, name = 'add_comment'),
     url(r'^add-comment/(?P<post_id>\d+)/$', views.add_comment, name = 'add_comment'),
+    url(r'^confirm-user-deletion/$', views.confirm_user_deletion, name = 'confirm_user_deletion'),
+    url(r'^confirm-user-deletion/(?P<user_id>\d+)/$', views.confirm_user_deletion, name = 'confirm_user_deletion'),
 ]

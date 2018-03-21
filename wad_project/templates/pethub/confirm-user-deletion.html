@@ -1,0 +1,22 @@
+{% extends "pethub/base.html" %}
+{% load staticfiles %}
+
+{% block title_block %}
+	Confirm Deletion
+{% endblock %}
+
+{% block body_block %}
+	<div id="deletion_container">
+		<h3>Are you sure you want to delete your account? All your previous posts will be lost!</h3>
+		<div id="deletion_button_container">
+
+			<form method="post" action="{% url 'confirm_user_deletion' %}{{ user.id }}/">
+				{% csrf_token %}
+
+				<button type="submit" name="submit" value="confirm_deletion">Yes, I want to delete my account.</button>
+				<button type="submit" name="submit" value="refuse_deletion">No, I want to keep using PetHub.</button>
+			</form>
+		</div>
+	</div> 
+
+{% endblock %}

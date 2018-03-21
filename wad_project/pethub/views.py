@@ -328,6 +328,31 @@ def delete_post(request, post_id):
     return user_profile(request, request.user.username)
 
 @login_required
+def confirm_user_deletion(request,user_id):
+    user = User.objects.get(id=user_id)
+    
+    if request.user == user:
+        if request.method == "GET":
+            return render(request, 'pethub/confirm-user-deletion.html', {'user' : user})
+        elif request.method == "POST":
+            
+            if request.POST.get('submit') == "confirm_deletion":
+                #get related userprofile
+                up = user.userprofile
+                
+                #delete user profile
+                up.delete()
+                user.delete()
+                return login(request)
+            elif request.POST.get('submit') == "refuse_deletion":
+                return index(request)
+                return userProfile(request,user.username)
+                
+    else:
+        return index(request)
+    
+
+@login_required
 def add_comment(request,post_id):
     # boolean to show success of upload
     uploaded = False

@@ -191,7 +191,8 @@ a {
 	border-radius: 20px;
 }
 
-#user_info {
+
+#own_profile_options {
 	text-align: justify;
 }
 
@@ -271,6 +272,18 @@ a {
 	background-color: #DCDCDC;
 }
 
+button {
+	border-color: #ABA6BF;
+	border-style: solid;
+	border-width: 2px;
+	border-radius: 5px;
+	padding: 5px;
+	background-color: #DCDCDC;
+	text-align: centre;
+	color: #585A56;
+	font-size: 16px;
+	font-weight: bolder;
+}
 
 
 /* for post-upload page */
@@ -291,8 +304,10 @@ a {
 	border-radius: 15px;
 }
 
-#delete_link {
-	margin-right: 5px;
+
+
+#user_deletion_button {
+	float: right;
 }
 
 .image_icon{
