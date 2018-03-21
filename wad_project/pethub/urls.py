@@ -23,7 +23,7 @@ urlpatterns = [
     url(r'^update-user/$',views.update_user,name='update-user'),
     url(r'^like/$', views.like, name = 'like_post'),
     url(r'^search/$', views.search, name = 'search'),
-    url(r"^delete_post/(?P<post_id>\d+)/$", views.delete_post, name="delete_post"),
+    url(r'^delete_post/(?P<post_id>\d+)/$', views.delete_post, name="delete_post"),
     url(r'^add-comment/$', views.add_comment, name = 'add_comment'),
-
+    url(r'^add-comment/(?P<post_id>\d+)/$', views.add_comment, name = 'add_comment'),
 ]

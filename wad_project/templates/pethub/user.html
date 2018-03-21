@@ -72,8 +72,10 @@
 						<button class="user_post_options" data-postid="{{post.id}}" type="button">
 									Like
 						</button>
-							
-						<a class="user_post_options" href="{% url 'delete_post' post.id %}">Delete Post</a>
+						<a href="{% url 'add_comment' %}{{ post.id }}">Add a comment</a>
+						{% if request.user == user %}
+							<a class="user_post_options" href="{% url 'delete_post' post.id %}">Delete Post</a>
+						{% endif %}
 									
 					{% endif %}
 

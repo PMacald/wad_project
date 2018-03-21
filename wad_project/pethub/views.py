@@ -310,8 +310,8 @@ def search(request):
     #Try and get data if get method used
     if request.method == "GET":
         # get term user searched for
-            search_term = request.GET.get("search_term", None)
-            print(search_term)
+        search_term = request.GET.get("search_term", None)
+            
 
     #filter posts based on search term
     post_list = Post.objects.filter(tags__name__in=search_term.split()).order_by('-upload_date').distinct()
@@ -328,10 +328,11 @@ def delete_post(request, post_id):
     return user_profile(request, request.user.username)
 
 @login_required
-def add_comment(request):
+def add_comment(request,post_id):
     # boolean to show success of upload
     uploaded = False
-
+    
+    post = Post.objects.get(id=post_id)
 
     #Try and get data if POST method used
     if request.method == "POST":
@@ -346,7 +347,10 @@ def add_comment(request):
                 # save associated user
                 comment.user = request.user
 
-                comment.post = request.post
+                #Assign relevant post to comment
+                comment.post = post
+                
+                
 
                 # Save comment information
                 comment.save()
@@ -354,7 +358,7 @@ def add_comment(request):
 
                 # show comment upload  was successful
                 uploaded = True
-
+                
             else:
                 # form was invalid, print error message
                 print(comment_form.errors,comment_form.errors)
@@ -364,6 +368,7 @@ def add_comment(request):
 
 
     context_dict = {'comment_form': comment_form,
-                       'uploaded': uploaded,}
+                       'uploaded': uploaded,
+                    'post' : post,}
     #Render template according to data received
     return render(request, 'pethub/add-comment.html', context_dict)
