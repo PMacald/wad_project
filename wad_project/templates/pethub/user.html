@@ -70,7 +70,7 @@
 						{% else %}
 							<p>No comments to show.</p>
 						{% endif %}
-						<a class="add_comment_link" href="{% url 'add_comment' %}{{ post.id }}">Add a comment</a>
+						<a class="button_link" href="{% url 'add_comment' %}{{ post.id }}">Add a comment</a>
 					</div>
 				<div class="post_likes">
 					<p>
@@ -84,7 +84,7 @@
 																	class="btn btn-primary btn-sm" type="button">Like</button>
 						
 						{% if request.user == user %}
-							<a class="user_post_options" href="{% url 'delete_post' post.id %}">Delete Post</a>
+							<a id="delete_link" class="button_link" href="{% url 'delete_post' post.id %}">Delete Post</a>
 						{% endif %}
 									
 					{% endif %}
