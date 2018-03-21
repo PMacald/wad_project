@@ -65,6 +65,10 @@ a {
 	font-weight: bolder;
 }
 
+a.selected {
+	color: blue;
+}
+
 #bottomBarContainer {
 	display: flex;
 	justify-content: space-between; 
