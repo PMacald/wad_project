@@ -46,6 +46,7 @@
 						{% else %}
 							<p>No comments to show.</p>
 						{% endif %}
+						<a href="{% url 'add_comment' %}{{ post.id }}">Add a comment</a>
 					</div>
 					<div class="post_likes"/>
 						<p>
@@ -55,7 +56,7 @@
 									{% if user.is_authenticated %}
 										<button class="likes-button" data-postid="{{post.id}}"
 																	class="btn btn-primary btn-sm" type="button">Like</button>
-										<a href="{% url 'add_comment' %}{{ post.id }}">Add a comment</a>
+										
 									{% endif %}
 
 					</div>

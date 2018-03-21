@@ -7,6 +7,7 @@
 
 {% block body_block %}
 <div id="mainBody">
+	<div id="user_info">
 	<div id="photoFrame">
 		<!-- check user is currently the one logged in -->
 		{% if user == request.user %}
@@ -28,7 +29,7 @@
 		{% endif %}
 
 	</div>
-
+	</div>
 	{% if userPosts %}
 	<div id="historic_posts">
 		<h2>Historic Posts: </h2>
@@ -61,6 +62,17 @@
 						{% endif %}
 					</p>
 				</div>
+				<div class="comments_container">
+					<h3>Comments</h3>
+						{% if post.comments.all %}
+							{% for comment in post.comments.all %}
+								<p>{{comment.comment_text}} - posted by <a href="{% url 'user_profile' %}{{ comment.user.username }}">{{comment.user.username}}</a> at {{comment.upload_date}}</p></br>
+							{% endfor %}
+						{% else %}
+							<p>No comments to show.</p>
+						{% endif %}
+						<a class="button_link" href="{% url 'add_comment' %}{{ post.id }}">Add a comment</a>
+					</div>
 				<div class="post_likes">
 					<p>
 						<strong class="like_count" data-postid="{{post.id}}">{{post.likes}}</strong> people like this post
@@ -69,12 +81,11 @@
 
 					{% if user.is_authenticated %}
 					
-						<button class="user_post_options" data-postid="{{post.id}}" type="button">
-									Like
-						</button>
-						<a href="{% url 'add_comment' %}{{ post.id }}">Add a comment</a>
+						<button class="likes-button" data-postid="{{post.id}}"
+																	class="btn btn-primary btn-sm" type="button">Like</button>
+						
 						{% if request.user == user %}
-							<a class="user_post_options" href="{% url 'delete_post' post.id %}">Delete Post</a>
+							<a id="delete_link" class="button_link" href="{% url 'delete_post' post.id %}">Delete Post</a>
 						{% endif %}
 									
 					{% endif %}
