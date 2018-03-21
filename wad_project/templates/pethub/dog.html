@@ -47,7 +47,7 @@
 					<h3>Comments</h3>
 						{% if post.comments.all %}
 							{% for comment in post.comments.all %}
-								<p>{{comment.comment_text}} - posted by <a href="{% url 'user_profile' %}{{ post.user.username }}">{{comment.user.username}}</a> at {{comment.upload_date}}</p></br>
+								<p>{{comment.comment_text}} - posted by <a href="{% url 'user_profile' %}{{ comment.user.username }}">{{comment.user.username}}</a> at {{comment.upload_date}}</p></br>
 							{% endfor %}
 						{% else %}
 							<p>No comments to show.</p>
@@ -57,16 +57,6 @@
 			<p>
 				<strong class="like_count" data-postid="{{post.id}}">{{post.likes}}</strong> people like this post
 			</p>
-		</div>
-		<div id="comments_container">
-					<h3>Comments</h3>
-						{% if post.comments.all %}
-							{% for comment in post.comments.all %}
-								<p>{{comment.comment_text}} - posted by <a href="{% url 'user_profile' %}{{ post.user.username }}">{{comment.user.username}}</a> at {{comment.upload_date}}</p></br>
-							{% endfor %}
-						{% else %}
-							<p>No comments to show.</p>
-						{% endif %}
 		</div>
 					{% if user.is_authenticated %}
 		<button class="likes-button" data-postid="{{post.id}}"
