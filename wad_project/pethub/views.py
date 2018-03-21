@@ -139,7 +139,6 @@ def user_login(request):
                 registered = True
                 login(request, user)
                 return redirect(reverse('index'))
-        
             else:
                 # form was invalid, print error message
                 print(user_form.errors, profile_form.errors)
@@ -161,8 +160,12 @@ def user_login(request):
                     # Account is disabled, so user cannot log in
                     return HttpResponse("Your account is disabled.")
             else:
-                print("Invalid login details: {0}, {1}".format(username, password))
-                return HttpResponse("Invalid login details - please try again.")
+                return render(request, 'pethub/login.html',
+                      {'user_form': user_form,
+                       'profile_form': profile_form,
+                       'registered': registered,
+                       'logged_in': False})
+                
 
     ####################################################################################
     # May need to edit to suit both forms        

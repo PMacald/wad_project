@@ -129,6 +129,10 @@ a {
 	justify-content: space-between;
 }
 
+#error_at_login_message {
+	color: #e80707;
+}
+
 /* Styles for user profiles */
 #photoFrame {
 	border-style: solid;

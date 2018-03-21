@@ -38,6 +38,9 @@
 
 	<div id="login_box" class="LoginPageBoxes">
 		<strong>Already got an account? Log in here!</strong>
+		{% if logged_in == False %}
+			<p  id="error_at_login_message"><strong>Sorry, those details don't appear correct. Please try again.</strong></p>
+		{% endif %}
 		<form id="login_form" method="post" action="{% url 'login' %}">
 	{% csrf_token %}
 	Username: </br>
