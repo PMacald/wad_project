@@ -87,6 +87,14 @@ a {
 	font-weight: bolder;
 }
 
+a.selected {
+	color: blue;
+}
+
+a.activePage {
+	color: blue;
+}
+
 #bottomBarContainer {
 	display: flex;
 	justify-content: space-between; 
