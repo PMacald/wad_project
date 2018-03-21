@@ -1,16 +1,17 @@
 /*Implementations on base.html */
 
 body {
-    background-color: #FFB6C1;
+    background-color: #C2D3DA;
 	margin: 0;
 }
 
 #navbar {
-	background-color: #FF69B4;
+	background-color: #F1F3F2;
 	width: 100%;
 	margin: 0 auto;
 	border-style: solid;
 	border-width: 2px;
+	border-color: #585A56;
 	position: relative;
 	padding: 5px;
 }
@@ -21,14 +22,14 @@ body {
 .PageDescriptor {
 	text-align: center;
 	font-family: Verdana;
-	color: #e80707;
+	color: #585A56;
 }
 
 #navbar h2 {
 	text-align: center;
 	font-family: Verdana;
 	margin: 0;
-	color: #e80707;
+	color: #585A56;
 
 }
 
@@ -41,7 +42,7 @@ body {
 }
 
 h1 {
-	color: #e80707;
+	color: #585A56;
 }
 
 #navbarLinks {
@@ -61,7 +62,7 @@ a {
 	font-family: Verdana;
 	font-size: 20;
 	text-decoration: none;
-	color: #e80707;
+	color: #585A56;
 	font-weight: bolder;
 }
 
@@ -102,7 +103,8 @@ a {
 /*for login/register page*/
 .LoginPageBoxes {
 	min-height: 400px;
-	background-color: #b0e0e6;
+	border-color: #585A56;
+	background-color: #F1F3F2;
 	justify-content: space-between;
 	line-height: 50px;
 	text-align: center;
@@ -120,6 +122,7 @@ a {
 	font-size: 22;
 	font-weight: bold;
 	text-align: center;
+	color: #585A56;
 }
 
 #login_box_container {
@@ -138,8 +141,8 @@ a {
 	border-style: solid;
 	border-width: 3px;
 	border-radius: 15px;
-	border-color: purple;
-	float: left;
+	border-color: #585A56;
+	
 	margin-left: 20px;
 	margin-right: 20px;
 	width: 200px;
@@ -155,7 +158,8 @@ a {
 #infoFrame {
 	border-style: solid;
 	border-width: 3px;
-	border-color: purple;
+	border-color: #585A56;
+	background-color: #F1F3F2;
 	width: 60%;
 	margin: 0 auto;
 	padding: 20px;
@@ -174,23 +178,24 @@ a {
 	width: 70%;
 	border-style: solid;
 	border-width: 2px;
-	border-color: purple;
+	border-color: #585A56;
 	margin: 0 auto;
 	padding-left: 5px;
 	padding-bottom: 5px;
 	margin-bottom: 10px;
 	border-radius: 15px;
+	background-color: #F1F3F2;
 }
 
 .post_title h3{
 	text-decoration: underline;
-	color: #e80707;
+	color: #585A56;
 }
 
 .post_image img {
 	border-style: solid;
 	border-width: 2px;
-	border-color: purple;
+	border-color: #585A56;
 }
 
 .post_description {
@@ -209,26 +214,46 @@ a {
 
 }
 
-
-/* for post-upload page */
-#post_upload_box {
-	min-height: 400px;
+.comments_container {
+	width: 80%;
 	background-color: #b0e0e6;
-	justify-content: space-between;
-	line-height: 20px;
-	text-align: center;
-	font-family: Verdana;
-	margin:0 auto;
 	border-style: solid;
-	border-width: 5px;
-	width: 60%;
-	padding: 20px;
+	border-width: 2px;
 	border-radius: 15px;
+	margin: 0 auto;
+	padding: 10px;
+}
+
+.add_comment_link {
+	border-color: #ABA6BF;
+	border-style: solid;
+	border-width: 1px;
+	border-radius: 5px;
+	padding: 5px;
+	background-color: #DCDCDC;
 }
 
 
 
+/* for post-upload page */
+#post_upload_box {
+	
+	background-color: #F1F3F2;
+	
+	line-height: 30px;
+	text-align: center;
+	font-family: Verdana;
+	
+	border-style: solid;
+	border-width: 5px;
+	
+	padding: 20px;
+	padding-left: 20px;
+	padding-right: 20px;
+	border-radius: 15px;
+}
+
 
 .image_icon{
-
+	
 }
