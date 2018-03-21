@@ -7,6 +7,7 @@
 
 {% block body_block %}
 <div id="mainBody">
+	<div id="user_info">
 	<div id="photoFrame">
 		<!-- check user is currently the one logged in -->
 		{% if user == request.user %}
@@ -28,7 +29,7 @@
 		{% endif %}
 
 	</div>
-
+	</div>
 	{% if userPosts %}
 	<div id="historic_posts">
 		<h2>Historic Posts: </h2>

@@ -16,7 +16,28 @@ body {
 	padding: 5px;
 }
 
+p {
+	font-family: Verdana;
+	font-size: 16;
+	color: #585A56;
+}
 
+h1 {
+	
+	font-family: Verdana;	
+	color: #585A56;
+
+}
+
+h2 {
+	font-family: Verdana;	
+	color: #585A56;
+}
+
+h3 {
+	font-family: Verdana;	
+	color: #585A56;
+}
 
 /*For descriptions on different pages - ensures consistency*/
 .PageDescriptor {
@@ -133,7 +154,10 @@ a {
 }
 
 #error_at_login_message {
-	color: #e80707;
+	font-size: 22;
+	
+	text-align: center;
+	color: #585A56;
 }
 
 /* Styles for user profiles */
@@ -147,6 +171,7 @@ a {
 	margin-right: 20px;
 	width: 200px;
 	height: 200px;
+	display: inline-block;
 }
 
 #photoFrame img {
@@ -161,9 +186,19 @@ a {
 	border-color: #585A56;
 	background-color: #F1F3F2;
 	width: 60%;
-	margin: 0 auto;
+	display: inline-block;
 	padding: 20px;
 	border-radius: 20px;
+}
+
+#user_info {
+	text-align: justify;
+}
+
+#infoFrame h2{
+	font-size: 22;
+	font-weight: bold;
+	color: #585A56;
 }
 
 #historic_posts {
