@@ -121,8 +121,16 @@
 						</p>
 					</div>
 						{% if user.is_authenticated %}
-							<button class="likes-button" data-postid="{{post.id}}"
-																	class="btn btn-primary btn-sm" type="button">Like</button>				
+							
+							
+							{% if user in post.liked_users.all %}
+								
+								<button class="likes-button" data-postid="{{post.id}}"
+																	class="btn btn-primary btn-sm" type="button">Unlike</button>
+							{% else %}
+								<button class="likes-button" data-postid="{{post.id}}"
+																	class="btn btn-primary btn-sm" type="button">Like</button>
+							{% endif %}
 						{% endif %}
 						{% if request.user == post.user %}
 							<a id="delete_link" class="button_link" href="{% url 'delete_post' post.id %}">Delete Post</a>

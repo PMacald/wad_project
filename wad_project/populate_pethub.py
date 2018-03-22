@@ -35,43 +35,46 @@ visit if you're ever in Perth!""",
     for user in users:
         add_profile(user['username'],user['first_name'],user['last_name'],user['password'],user['userPicture'],user['bio'])
 
-    
+    alexa = User.objects.get(username="AlexaK")
+    jessie = User.objects.get(username="Baroness_Barrington")
+    david = User.objects.get(username="DSyntop")
 
     
     #Create lists of dictionaries holding example posts
     posts = [
     {'title': 'Cute dogs hanging around Kelvingrove!',
-     'likes': 23,
+     'liked_users': [david,jessie],
      'description': "Saw some ultra-cute puppies walking around Kelvingrove today, so cute!!",
-     'user': User.objects.get(username="AlexaK"),
+     'user': alexa,
      'tags': "dogs, cute, adorable, playing, fluff",
      'picture': None,},
     
     {'title': 'Adorably cute kittens',
-     'likes': 40,
+     'liked_users': [alexa,david],
      'description': "Went to the cat cafe today and the little kittens were insanely cute; would recommend to all cat-lovers.",
-     'user': User.objects.get(username="Baroness_Barrington"),
+     'user': jessie,
      'tags': "cats, coffee, playtime, chilling",
      'picture': None,},
 
      {'title': "Can't wait to tell the grandkids about Rufus!",
-     'likes': 54,
+     'liked_users': [alexa,jessie],
      'description': "Just got a new pup, Rufus, and I think the twins will love him! Keeping him a secret until they next come round, will keep you all posted!",
-     'user': User.objects.get(username="DSyntop"),
+     'user': david,
      'tags': "puppy, dogs, surprise, playtime",
      'picture': None,}]
     
 
     for post in posts:
-        add_post(post['title'],post['likes'],post['description'],post['picture'],post['tags'],post['user'])
+        add_post(post['title'],post['liked_users'],post['description'],post['picture'],post['tags'],post['user'])
 
-    for i in range(0,20):
-        add_post(str(i),i,"test_post",None, ["help", "this", "isn't", "working"], User.objects.get(username="DSyntop"))
-        print("hello")
+    for i in range(0,200):
+        add_post("test post " + str(i),[david,jessie],"test_post",None, ["help", "this", "isn't", "working"], User.objects.get(username="DSyntop"))
+        
     
-def add_post(title, likes, description, picture, tags, user):
+def add_post(title, liked_users, description, picture, tags, user):
     p = Post.objects.get_or_create(title=title)[0]
-    p.likes = likes
+    for user in liked_users:
+        p.liked_users.add(user)
     p.description = description
     p.tags = tags
     p.picture = picture

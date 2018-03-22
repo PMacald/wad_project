@@ -39,12 +39,20 @@ $(document).ready(function() {
 		
 		// Deactivate previous post
 		$(this).siblings(".post_container").animate({width:"70%"}, "fast");
-		$(this).siblings(".post_container").css({'borderColor': 'purple', 'borderWidth' : '2px'});
+		$(this).siblings(".post_container").css({'borderColor': '#585A56', 'borderWidth' : '2px'});
 		
 		// Expand post		
 		$(this).animate({width:"80%"});
-		$(this).css({'borderColor': '#e80707', 'borderWidth': '5px'});
+		$(this).css({'borderColor': '#000080', 'borderWidth': '5px'});
 		
 	});
 
+	//for changing like buttons to unlike and vice versa
+	$(".likes-button").click(function() {
+		if ($(this).text() == "Like") {
+				$(this).text("Unlike");}
+		else {
+			$(this).text("Like");
+		}
+	});
 });

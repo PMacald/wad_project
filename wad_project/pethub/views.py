@@ -16,13 +16,23 @@ from pethub.models import UserProfile, User, Post, Comment
 def index(request):
     #get list of posts
     posts = Post.objects.order_by('-upload_date')
-    post_list = paginate(posts, request)
     
+    #check if there is a more efficient way to do this
+    post_list = paginate(posts, request)
+    post_list = set_likes(post_list)
     
     response = render(request, 'pethub/index.html', {'post_list' : post_list,
                                                      'feed_required':True})
     #Get response for client and return it (updating cookies if need be)
     return response
+
+#for setting likes on posts to the number of users that have liked it, rather than an arbritrary number
+def set_likes(post_list):
+    for post in post_list:
+        likes = post.liked_users.count()
+        post.likes = likes
+        post.save()
+    return post_list
 
 #function for splitting up lists of posts and making them into pages for templates
 def paginate(posts, request):
@@ -51,7 +61,9 @@ def about_us(request):
 @login_required
 def trending(request):
     posts = Post.objects.order_by('-likes')
+    
     post_list = paginate(posts, request)
+    post_list = set_likes(post_list)
     # Get response early so we can gather cookie info
     response = render(request, 'pethub/trending.html', {'post_list' : post_list,
                                                         'feed_required': True})
@@ -79,6 +91,7 @@ def user_profile(request, username):
     userProfile = UserProfile.objects.get_or_create(user=user)[0]
     userPosts = Post.objects.filter(user=user)
     post_list = paginate(userPosts, request)
+    post_list = set_likes(post_list)
     context_dict = {'user' : user,
                     'userProfile' : userProfile,
                     'post_list' : userPosts,
@@ -90,6 +103,7 @@ def cat(request):
     #Filter object based on tag
     posts = Post.objects.filter(tags__name__in=["cats", "cat", "kitten", "kitty", "feline", "catto", "kitties"]).order_by('-upload_date').distinct()
     post_list = paginate(posts, request)
+    post_list = set_likes(post_list)
     response = render(request, 'pethub/cat.html', {'post_list' : post_list,
                                                    'feed_required':True})
     #Get response for client and return it (updating cookies if need be)
@@ -100,6 +114,7 @@ def exotic(request):
     #Filter object based on tag
     posts = Post.objects.filter(tags__name__in=["exotic", "lizard", "bird", "lizards", "iguana" "dragon", "fish", "parrot", "birds", "snake", "snakes"]).order_by('-upload_date').distinct()
     post_list = paginate(posts, request)
+    post_list = set_likes(post_list)
     response = render(request, 'pethub/exotic-animal.html', {'post_list' : post_list,
                                                              'feed_required':True})
     #Get response for client and return it (updating cookies if need be)
@@ -120,6 +135,7 @@ def hutch_animal(request):
     #Filter object based on tag
     posts = Post.objects.filter(tags__name__in=["hutch", "rabbit", "guinea", "hamster", "chinchilla", "guinea-pig", "mice", "mouse", "rabbits", "hamsters", "chinchillas"]).order_by('-upload_date')
     post_list = paginate(posts, request)
+    post_list = set_likes(post_list)
     response = render(request, 'pethub/hutch-animal.html', {'post_list' : post_list,
                                                             'feed_required':True})
     #Get response for client and return it (updating cookies if need be)
@@ -193,10 +209,6 @@ def user_login(request):
                        'registered': registered,
                        'logged_in': False})
                 
-
-    ####################################################################################
-    # May need to edit to suit both forms
-
     else:
         #not using POST methods, so make new models
         user_form = UserForm()
@@ -345,7 +357,7 @@ def search(request):
     #filter posts based on search term
     posts = Post.objects.filter(tags__name__in=search_term.split()).order_by('-upload_date').distinct()
     post_list = paginate(posts, request)
-
+    post_list = set_likes(post_list)
     return render(request, 'pethub/search.html', {'post_list' : post_list,
                                                   'search_term' : search_term,
                                                   'feed_required':True})
