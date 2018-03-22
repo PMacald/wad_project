@@ -95,6 +95,15 @@ a.activePage {
 	color: blue;
 }
 
+.pages_container {
+	
+	display: flex;
+
+	justify-content: space-between; 
+	margin-bottom: 30px;
+	clear: both;
+}
+
 #bottomBarContainer {
 	display: flex;
 	justify-content: space-between; 

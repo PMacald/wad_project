@@ -129,14 +129,20 @@
 					</div>
 		{% endfor %}
 
-		<div class="pages_holder">
+		<div class="pages_container">
+			<div>
 			{% if post_list.has_previous %}
-				<a href="?page={{ post_list.previous_page_number }}">previous</a>
+				<a class="button_link" href="?page={{ post_list.previous_page_number }}">Previous</a>
 			{% endif %}
-			<strong>Page {{ post_list.number }} of {{ post_list.paginator.num_pages }}</strong>
+			</div>
+			<div>
+			<h3>Page {{ post_list.number }} of {{ post_list.paginator.num_pages }}</h3>
+			</div>
+			<div>
 			{% if post_list.has_next %}
-				<a href="?page={{ post_list.next_page_number }}">next</a>
+				<a class="button_link" href="?page={{ post_list.next_page_number }}">Next</a>
 			{% endif %}
+			</div>
 				
 			
 		</div>

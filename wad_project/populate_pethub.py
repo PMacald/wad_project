@@ -66,7 +66,7 @@ visit if you're ever in Perth!""",
         add_post(post['title'],post['likes'],post['description'],post['picture'],post['tags'],post['user'])
 
     for i in range(0,20):
-        add_post(str(i),i,"test_post",None, "help, this, isn't, working", User.objects.get(username="DSyntop"))
+        add_post(str(i),i,"test_post",None, ["help", "this", "isn't", "working"], User.objects.get(username="DSyntop"))
         print("hello")
     
 def add_post(title, likes, description, picture, tags, user):

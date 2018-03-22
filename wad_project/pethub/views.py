@@ -23,6 +23,7 @@ def index(request):
     #Get response for client and return it (updating cookies if need be)
     return response
 
+#function for splitting up lists of posts and making them into pages for templates
 def paginate(posts, request):
     #25 posts per page
     paginator = Paginator(posts,20)
