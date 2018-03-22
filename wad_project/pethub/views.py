@@ -309,6 +309,7 @@ def update_user(request):
 
             updated = True
             login(request, user)
+            return user_profile(request,user.username)
 
         else:
             # form was invalid, print error message
@@ -336,8 +337,10 @@ def like(request):
         if post:
             #Check if user has liked the post before
             if request.user in post.liked_users.all():
+                #if yes, remove them
                 post.liked_users.remove(request.user)
             else:
+                #if not, add them in
                 post.liked_users.add(request.user)
             #Set likes count to number of liked users
             likes = post.liked_users.count()
@@ -387,8 +390,8 @@ def confirm_user_deletion(request,user_id):
                 user.delete()
                 return login(request)
             elif request.POST.get('submit') == "refuse_deletion":
-                return index(request)
-                return userProfile(request,user.username)
+                
+                return user_profile(request,user.username)
                 
     else:
         return index(request)
