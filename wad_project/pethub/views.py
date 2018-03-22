@@ -19,7 +19,8 @@ def index(request):
     post_list = paginate(posts, request)
     
     
-    response = render(request, 'pethub/index.html', {'post_list' : post_list})
+    response = render(request, 'pethub/index.html', {'post_list' : post_list,
+                                                     'feed_required':True})
     #Get response for client and return it (updating cookies if need be)
     return response
 
@@ -52,7 +53,8 @@ def trending(request):
     posts = Post.objects.order_by('-likes')
     post_list = paginate(posts, request)
     # Get response early so we can gather cookie info
-    response = render(request, 'pethub/trending.html', {'post_list' : post_list})
+    response = render(request, 'pethub/trending.html', {'post_list' : post_list,
+                                                        'feed_required': True})
     #Get response for client and return it (updating cookies if need be)
     return response
 
@@ -79,7 +81,8 @@ def user_profile(request, username):
     post_list = paginate(userPosts, request)
     context_dict = {'user' : user,
                     'userProfile' : userProfile,
-                    'post_list' : userPosts}
+                    'post_list' : userPosts,
+                    'feed_required': True}
     return render(request, 'pethub/user.html', context_dict)
 
 @login_required
@@ -87,7 +90,8 @@ def cat(request):
     #Filter object based on tag
     posts = Post.objects.filter(tags__name__in=["cats", "cat", "kitten", "kitty", "feline", "catto", "kitties"]).order_by('-upload_date').distinct()
     post_list = paginate(posts, request)
-    response = render(request, 'pethub/cat.html', {'post_list' : post_list})
+    response = render(request, 'pethub/cat.html', {'post_list' : post_list,
+                                                   'feed_required':True})
     #Get response for client and return it (updating cookies if need be)
     return response
 
@@ -96,7 +100,8 @@ def exotic(request):
     #Filter object based on tag
     posts = Post.objects.filter(tags__name__in=["exotic", "lizard", "bird", "lizards", "iguana" "dragon", "fish", "parrot", "birds", "snake", "snakes"]).order_by('-upload_date').distinct()
     post_list = paginate(posts, request)
-    response = render(request, 'pethub/exotic-animal.html', {'post_list' : post_list})
+    response = render(request, 'pethub/exotic-animal.html', {'post_list' : post_list,
+                                                             'feed_required':True})
     #Get response for client and return it (updating cookies if need be)
     return response
 
@@ -105,7 +110,8 @@ def dog(request):
     #Filter object based on tag
     posts = Post.objects.filter(tags__name__in=["dog", "doggo", "dogs", "puppy", "pup", "pupper"]).order_by('-upload_date').distinct()
     post_list = paginate(posts, request)
-    response = render(request, 'pethub/dog.html', {'post_list' : post_list})
+    response = render(request, 'pethub/dog.html', {'post_list' : post_list,
+                                                   'feed_required':True})
     #Get response for client and return it (updating cookies if need be)
     return response
 
@@ -114,7 +120,8 @@ def hutch_animal(request):
     #Filter object based on tag
     posts = Post.objects.filter(tags__name__in=["hutch", "rabbit", "guinea", "hamster", "chinchilla", "guinea-pig", "mice", "mouse", "rabbits", "hamsters", "chinchillas"]).order_by('-upload_date')
     post_list = paginate(posts, request)
-    response = render(request, 'pethub/hutch-animal.html', {'post_list' : post_list})
+    response = render(request, 'pethub/hutch-animal.html', {'post_list' : post_list,
+                                                            'feed_required':True})
     #Get response for client and return it (updating cookies if need be)
     return response
 
@@ -233,7 +240,7 @@ def post_upload(request):
                 # save post instance
                 post.save()
 
-                # show registration was successful
+                # show upload was successful
                 uploaded = True
 
             else:
@@ -264,6 +271,7 @@ def update_user(request):
 
     #If a post, make new forms for updating old objects
     if request.method == 'POST':
+        
         update_user_profile_form = UpdateUserProfileForm(request.POST, instance=profile)
         update_user_form = UpdateUserForm(request.POST, instance=user)
 
@@ -294,8 +302,9 @@ def update_user(request):
             # form was invalid, print error message
             print(user_form.errors, profile_form.errors)
     else:
-        update_user_form = UpdateUserForm()
-        update_user_profile_form = UpdateUserProfileForm
+        # generate update user forms with pre-populated fields based on their current information
+        update_user_form = UpdateUserForm(initial={'username':user.username,'email':user.email, 'first_name':user.first_name, 'last_name':user.last_name})
+        update_user_profile_form = UpdateUserProfileForm(initial={'userPicture':profile.userPicture,'bio':profile.bio})
 
     return render(request, 'pethub/update-user.html', {'update_user_profile_form' : update_user_profile_form,
                                                        'update_user_form': update_user_form,
@@ -338,7 +347,8 @@ def search(request):
     post_list = paginate(posts, request)
 
     return render(request, 'pethub/search.html', {'post_list' : post_list,
-                                                  'search_term' : search_term})
+                                                  'search_term' : search_term,
+                                                  'feed_required':True})
 
 @login_required
 def delete_post(request, post_id):
