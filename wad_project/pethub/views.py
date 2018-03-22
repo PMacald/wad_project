@@ -1,3 +1,4 @@
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
@@ -13,12 +14,30 @@ from pethub.models import UserProfile, User, Post, Comment
 
 @login_required
 def index(request):
-    post_list = Post.objects.order_by('-upload_date')
-
-    # Get response early so we can gather cookie info
+    #get list of posts
+    posts = Post.objects.order_by('-upload_date')
+    post_list = paginate(posts, request)
+    
+    
     response = render(request, 'pethub/index.html', {'post_list' : post_list})
     #Get response for client and return it (updating cookies if need be)
     return response
+
+def paginate(posts, request):
+    #25 posts per page
+    paginator = Paginator(posts,20)
+
+    page = request.GET.get('page')
+    try:
+        post_list = paginator.page(page)
+    except PageNotAnInteger:
+        #deliver first page
+        post_list = paginator.page(1)
+    except EmptyPage:
+        # if out-of-range, return last page
+        post_list = paginator.page(paginator.num_pages)
+    return post_list
+    
 
 @login_required
 def about_us(request):
@@ -29,8 +48,8 @@ def about_us(request):
 
 @login_required
 def trending(request):
-    post_list = Post.objects.order_by('-likes')
-
+    posts = Post.objects.order_by('-likes')
+    post_list = paginate(posts, request)
     # Get response early so we can gather cookie info
     response = render(request, 'pethub/trending.html', {'post_list' : post_list})
     #Get response for client and return it (updating cookies if need be)
@@ -56,7 +75,7 @@ def user_profile(request, username):
     user = User.objects.get(username=username)
     userProfile = UserProfile.objects.get_or_create(user=user)[0]
     userPosts = Post.objects.filter(user=user)
-
+    post_list = paginate(userPosts, request)
     context_dict = {'user' : user,
                     'userProfile' : userProfile,
                     'post_list' : userPosts}
@@ -65,8 +84,8 @@ def user_profile(request, username):
 @login_required
 def cat(request):
     #Filter object based on tag
-    post_list = Post.objects.filter(tags__name__in=["cats", "cat", "kitten", "kitty", "feline", "catto", "kitties"]).order_by('-upload_date').distinct()
-
+    posts = Post.objects.filter(tags__name__in=["cats", "cat", "kitten", "kitty", "feline", "catto", "kitties"]).order_by('-upload_date').distinct()
+    post_list = paginate(posts, request)
     response = render(request, 'pethub/cat.html', {'post_list' : post_list})
     #Get response for client and return it (updating cookies if need be)
     return response
@@ -74,8 +93,8 @@ def cat(request):
 @login_required
 def exotic(request):
     #Filter object based on tag
-    post_list = Post.objects.filter(tags__name__in=["exotic", "lizard", "bird", "dragon", "fish", "parrot", "birds", "snake", "snakes"]).order_by('-upload_date').distinct()
-
+    posts = Post.objects.filter(tags__name__in=["exotic", "lizard", "bird", "lizards", "iguana" "dragon", "fish", "parrot", "birds", "snake", "snakes"]).order_by('-upload_date').distinct()
+    post_list = paginate(posts, request)
     response = render(request, 'pethub/exotic-animal.html', {'post_list' : post_list})
     #Get response for client and return it (updating cookies if need be)
     return response
@@ -83,8 +102,8 @@ def exotic(request):
 @login_required
 def dog(request):
     #Filter object based on tag
-    post_list = Post.objects.filter(tags__name__in=["dog", "doggo", "dogs", "puppy", "pup", "pupper"]).order_by('-upload_date').distinct()
-
+    posts = Post.objects.filter(tags__name__in=["dog", "doggo", "dogs", "puppy", "pup", "pupper"]).order_by('-upload_date').distinct()
+    post_list = paginate(posts, request)
     response = render(request, 'pethub/dog.html', {'post_list' : post_list})
     #Get response for client and return it (updating cookies if need be)
     return response
@@ -92,8 +111,8 @@ def dog(request):
 @login_required
 def hutch_animal(request):
     #Filter object based on tag
-    post_list = Post.objects.filter(tags__name__in=["hutch", "rabbit", "guinea", "hamster", "chinchilla", "guinea-pig", "mice", "mouse", "rabbits", "hamsters", "chinchillas"]).order_by('-upload_date')
-
+    posts = Post.objects.filter(tags__name__in=["hutch", "rabbit", "guinea", "hamster", "chinchilla", "guinea-pig", "mice", "mouse", "rabbits", "hamsters", "chinchillas"]).order_by('-upload_date')
+    post_list = paginate(posts, request)
     response = render(request, 'pethub/hutch-animal.html', {'post_list' : post_list})
     #Get response for client and return it (updating cookies if need be)
     return response
@@ -314,8 +333,8 @@ def search(request):
             
 
     #filter posts based on search term
-    post_list = Post.objects.filter(tags__name__in=search_term.split()).order_by('-upload_date').distinct()
-
+    posts = Post.objects.filter(tags__name__in=search_term.split()).order_by('-upload_date').distinct()
+    post_list = paginate(posts, request)
 
     return render(request, 'pethub/search.html', {'post_list' : post_list,
                                                   'search_term' : search_term})
