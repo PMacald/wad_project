@@ -97,7 +97,7 @@
 									No tags assigned
 								{% else %}
 									{% for tag in post.tags.all %}
-											{{ tag.name }}
+											{{ tag.name }},
 									{% endfor %}
 								{% endif %}
 				</p>
@@ -146,7 +146,9 @@
 			{% endif %}
 			</div>
 			<div>
-			<h3>Page {{ post_list.number }} of {{ post_list.paginator.num_pages }}</h3>
+			{% if post_list.paginator.num_pages > 1%}
+				<h3>Page {{ post_list.number }} of {{ post_list.paginator.num_pages }}</h3>
+			{% endif %}
 			</div>
 			<div>
 			{% if post_list.has_next %}
