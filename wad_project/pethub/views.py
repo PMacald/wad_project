@@ -16,11 +16,11 @@ from pethub.models import UserProfile, User, Post, Comment
 def index(request):
     #get list of posts
     posts = Post.objects.order_by('-upload_date')
-    
+
     #check if there is a more efficient way to do this
     post_list = paginate(posts, request)
     post_list = set_likes(post_list)
-    
+
     response = render(request, 'pethub/index.html', {'post_list' : post_list,
                                                      'feed_required':True})
     #Get response for client and return it (updating cookies if need be)
@@ -49,7 +49,7 @@ def paginate(posts, request):
         # if out-of-range, return last page
         post_list = paginator.page(paginator.num_pages)
     return post_list
-    
+
 
 @login_required
 def about_us(request):
@@ -61,7 +61,7 @@ def about_us(request):
 @login_required
 def trending(request):
     posts = Post.objects.order_by('-likes')
-    
+
     post_list = paginate(posts, request)
     post_list = set_likes(post_list)
     # Get response early so we can gather cookie info
@@ -141,7 +141,7 @@ def hutch_animal(request):
     #Get response for client and return it (updating cookies if need be)
     return response
 
-def user_login(request):
+def user_login(request, redirect_from_deletion=False):
 
     # boolean to show success of registration
     registered = False
@@ -151,7 +151,7 @@ def user_login(request):
 
 
     #Try and get data if POST method used
-    if request.method == "POST":
+    if request.method == "POST" and redirect_from_deletion == False:
 
         # for users that wish to register
         if request.POST.get('submit') == "Register":
@@ -208,7 +208,7 @@ def user_login(request):
                        'profile_form': profile_form,
                        'registered': registered,
                        'logged_in': False})
-                
+
     else:
         #not using POST methods, so make new models
         user_form = UserForm()
@@ -283,7 +283,7 @@ def update_user(request):
 
     #If a post, make new forms for updating old objects
     if request.method == 'POST':
-        
+
         update_user_profile_form = UpdateUserProfileForm(request.POST, instance=profile)
         update_user_form = UpdateUserForm(request.POST, instance=user)
 
@@ -355,7 +355,7 @@ def search(request):
     if request.method == "GET":
         # get term user searched for
         search_term = request.GET.get("search_term", None)
-            
+
 
     #filter posts based on search term
     posts = Post.objects.filter(tags__name__in=search_term.split()).order_by('-upload_date').distinct()
@@ -375,33 +375,33 @@ def delete_post(request, post_id):
 @login_required
 def confirm_user_deletion(request,user_id):
     user = User.objects.get(id=user_id)
-    
+
     if request.user == user:
         if request.method == "GET":
             return render(request, 'pethub/confirm-user-deletion.html', {'user' : user})
         elif request.method == "POST":
-            
+
             if request.POST.get('submit') == "confirm_deletion":
                 #get related userprofile
                 up = user.userprofile
-                
+
                 #delete user profile
                 up.delete()
                 user.delete()
-                return login(request)
+                return user_login(request,True)
             elif request.POST.get('submit') == "refuse_deletion":
-                
+
                 return user_profile(request,user.username)
-                
+
     else:
         return index(request)
-    
+
 
 @login_required
 def add_comment(request,post_id):
     # boolean to show success of upload
     uploaded = False
-    
+
     post = Post.objects.get(id=post_id)
 
     #Try and get data if POST method used
@@ -419,8 +419,8 @@ def add_comment(request,post_id):
 
                 #Assign relevant post to comment
                 comment.post = post
-                
-                
+
+
 
                 # Save comment information
                 comment.save()
@@ -428,7 +428,7 @@ def add_comment(request,post_id):
 
                 # show comment upload  was successful
                 uploaded = True
-                
+
             else:
                 # form was invalid, print error message
                 print(comment_form.errors,comment_form.errors)
