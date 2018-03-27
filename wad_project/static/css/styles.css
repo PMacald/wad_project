@@ -39,6 +39,7 @@ h3 {
 	color: #585A56;
 }
 
+
 /*For descriptions on different pages - ensures consistency*/
 .PageDescriptor {
 	text-align: center;
@@ -327,6 +328,16 @@ button {
 	float: right;
 }
 
-.image_icon{
-	
+/*Styles for 'about us' page */
+.name {
+	font-family: Verdana;	
+	color: #585A56;
+	font-size: 20px;
+}
+
+#about_descr {
+	font-family: Verdana;	
+	color: #585A56;
+	font-size: 16px;
+	padding: 20px;
 }

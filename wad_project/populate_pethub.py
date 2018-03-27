@@ -4,7 +4,8 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE',
 
 import django
 django.setup()
-from pethub.models import UserProfile, User, Post
+from pethub.models import UserProfile, User, Post, Comment
+from random import randint, choice
 
 def populate():
     
@@ -95,7 +96,16 @@ visit if you're ever in Perth!""",
     for post in posts:
         add_post(post['title'],post['liked_users'],post['description'],post['picture'],post['tags'],post['user'])
 
+    comments = ["So cute!","Awww!","I love it!","Adorable!","Can't wait to hear more about this!","Tell me more!","This. This is why this site exists."]
+    users = [david,jessie,alexa]
     
+    for post in Post.objects.all():
+        #select random comment from list
+        comment_num = randint(0,len(comments)-1)
+        #add comment to post
+        add_comment(post,comments[comment_num], choice(users))
+        #remove comment to reduce repetition
+        comments.remove(comments[comment_num])
     
 def add_post(title, liked_users, description, picture, tags, user):
     p = Post.objects.get_or_create(title=title)[0]
@@ -108,6 +118,15 @@ def add_post(title, liked_users, description, picture, tags, user):
     p.user = user
     p.save()
     return p
+
+def add_comment(post,comment_text,user):
+    #save comment details
+    comment = Comment.objects.get_or_create(comment_text=comment_text)[0]
+    comment.post = post
+    comment.comment_text = comment_text
+    comment.user = user
+    comment.save()
+    return comment
 
 def add_profile(username, first_name, last_name, password, userPicture, bio):
     
