@@ -108,6 +108,7 @@ visit if you're ever in Perth!""",
         comments.remove(comments[comment_num])
     
 def add_post(title, liked_users, description, picture, tags, user):
+    #save changes/addition of post
     p = Post.objects.get_or_create(title=title)[0]
     for l_user in liked_users:
         p.liked_users.add(l_user)
@@ -129,7 +130,7 @@ def add_comment(post,comment_text,user):
     return comment
 
 def add_profile(username, first_name, last_name, password, userPicture, bio):
-    
+    #save user details
     u = User.objects.get_or_create(username=username)[0]
     u.first_name = first_name
     u.last_name = last_name
