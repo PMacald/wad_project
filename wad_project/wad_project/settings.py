@@ -33,11 +33,7 @@ SECRET_KEY = '0vdfqb33$k(s&c9sr8=o*ty4)g&89celnp%5rwd*up2q*uc28f'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-<<<<<<< HEAD
-ALLOWED_HOSTS = ['http://pmacald.pythonanywhere.com']
-=======
 ALLOWED_HOSTS = ['pmacald.pythonanywhere.com']
->>>>>>> d1016632533c10657f56b2b2238f57caa3345c2c
 
 # Include url for redirection after login
 
