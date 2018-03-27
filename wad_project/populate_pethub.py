@@ -97,9 +97,12 @@ visit if you're ever in Perth!""",
         add_post(post['title'],post['liked_users'],post['description'],post['picture'],post['tags'],post['user'])
 
     comments = ["So cute!","Awww!","I love it!","Adorable!","Can't wait to hear more about this!","Tell me more!","This. This is why this site exists."]
-    users = [david,jessie,alexa]
+    
     
     for post in Post.objects.all():
+        users = [david,jessie,alexa]
+        #ensure user doesn't comment on own post
+        users.remove(post.user)
         #select random comment from list
         comment_num = randint(0,len(comments)-1)
         #add comment to post

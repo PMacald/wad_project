@@ -288,6 +288,11 @@ a.activePage {
 	border-radius: 5px;
 	padding: 5px;
 	background-color: #DCDCDC;
+	
+}
+
+.comment_delete {
+	float: right;
 }
 
 button {
