@@ -397,7 +397,7 @@ def confirm_user_deletion(request,user_id):
                 #delete user profile
                 up.delete()
                 user.delete()
-                return login(request)
+                HttpResponseRedirect(reverse('index'))
             elif request.POST.get('submit') == "refuse_deletion":
                 
                 return user_profile(request,user.username)
