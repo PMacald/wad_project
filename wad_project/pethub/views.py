@@ -379,7 +379,7 @@ def delete_comment(request, comment_id):
     comment = Comment.objects.get(id=comment_id)
     if comment.user == request.user:
         Comment.objects.get(id=comment_id).delete()
-    return index(request)
+    return redirect(reverse('index'))
 
 @login_required
 def confirm_user_deletion(request,user_id):
