@@ -11,11 +11,12 @@
 
 <div id="post_upload_box">
 	{% if uploaded %}
+	<!-- in case redirect doesn't pick up -->
 	<strong>Your post has been uploaded! Return to the main page here:</strong>
-</br>
-<a href="{% url 'index' %}">Home</a>
-	{% else %}
-<div >
+	</br>
+	<a href="{% url 'index' %}">Home</a>
+		{% else %}
+	<div >
 	<br />
 	<strong>Upload a Post Here!</strong>
 	<form id="post_upload_form" method="post" action="{% url 'post-upload' %}"

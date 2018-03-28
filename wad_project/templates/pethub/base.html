@@ -107,8 +107,11 @@
 					<h3>Comments</h3>
 						{% if post.comments.all %}
 							{% for comment in post.comments.all %}
-								<p>{{comment.comment_text}} - posted by <a href="{% url 'user_profile' %}{{ comment.user.username }}">{{comment.user.username}}</a> at {{comment.upload_date}}</p></br>
-								
+								<p>{{comment.comment_text}} - posted by <a href="{% url 'user_profile' %}{{ comment.user.username }}">{{comment.user.username}}</a> at {{comment.upload_date}}</p>
+								{% if comment.user == request.user %}
+									<a id="delete_link" class="button_link comment_delete" href="{% url 'delete_comment' comment.id %}">Delete Comment</a>
+								{% endif %}
+								</br>
 							{% endfor %}
 						{% else %}
 							<p>No comments to show.</p>

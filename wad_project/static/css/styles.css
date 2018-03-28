@@ -39,6 +39,7 @@ h3 {
 	color: #585A56;
 }
 
+
 /*For descriptions on different pages - ensures consistency*/
 .PageDescriptor {
 	text-align: center;
@@ -287,6 +288,11 @@ a.activePage {
 	border-radius: 5px;
 	padding: 5px;
 	background-color: #DCDCDC;
+	
+}
+
+.comment_delete {
+	float: right;
 }
 
 button {
@@ -327,6 +333,21 @@ button {
 	float: right;
 }
 
-.image_icon{
-	
+/*Styles for 'about us' page */
+.name {
+	font-family: Verdana;	
+	color: #585A56;
+	font-size: 20px;
+}
+
+#about_descr {
+	font-family: Verdana;	
+	color: #585A56;
+	font-size: 16px;
+	padding: 20px;
+}
+
+/* Styles for extra info page */
+.extra_info {
+	margin: 20px;
 }
