@@ -28,9 +28,10 @@ MEDIA_DIR = os.path.join(BASE_DIR, 'media')
 SECRET_KEY = '0vdfqb33$k(s&c9sr8=o*ty4)g&89celnp%5rwd*up2q*uc28f'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['pmacald.pythonanywhere.com']
+ALLOWED_HOSTS = ['pmacald.pythonanywhere.com',
+                '127.0.0.1']
 
 # Include url for redirection after login
 
