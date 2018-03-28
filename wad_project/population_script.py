@@ -4,7 +4,8 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE',
 
 import django
 django.setup()
-from pethub.models import UserProfile, User, Post
+from pethub.models import UserProfile, User, Post, Comment
+from random import randint, choice
 
 def populate():
     
@@ -15,7 +16,7 @@ def populate():
               'last_name': 'Kanetrot',
               'bio': "Hi! I'm Alexa and I'm a mature student of the University of Bristol. I love my kids, sometimes nearly as much as cute dogs.",
               'password': 'alexaK78',
-              'userPicture': None,},
+              'userPicture': 'user_images/alexa_user_image.png',},
 
              {'username': 'Baroness_Barrington',
               'first_name': 'Jessie',
@@ -23,14 +24,14 @@ def populate():
               'bio': """Hey, welcome to my profile! I'm really into talking about my pets to anyone who will listen. That and my business, Relish. Definitely give us a
 visit if you're ever in Perth!""",
               'password': 'Relish',
-              'userPicture': None,},
+              'userPicture': 'user_images/jessie_user_image.png',},
 
              {'username': 'DSyntop',
               'first_name': 'David',
               'last_name': 'Syntop',
               'bio': "My name's David and if you stick around for any length of time, I'll end up telling you about my dog.",
               'password': 'Paws_Newman',
-              'userPicture': None,},]
+              'userPicture': 'user_images/david_user_image.png',}]
 
     for user in users:
         add_profile(user['username'],user['first_name'],user['last_name'],user['password'],user['userPicture'],user['bio'])
@@ -46,44 +47,93 @@ visit if you're ever in Perth!""",
      'liked_users': [david,jessie],
      'description': "Saw some ultra-cute puppies walking around Kelvingrove today, so cute!!",
      'user': alexa,
-     'tags': "dogs, cute, adorable, playing, fluff",
-     'picture': None,},
+     'tags': "dogs,cute,adorable,playing,fluff",
+     'picture': 'post_images/kg_dogs.jpg',},
     
     {'title': 'Adorably cute kittens',
      'liked_users': [alexa,david],
      'description': "Went to the cat cafe today and the little kittens were insanely cute; would recommend to all cat-lovers.",
      'user': jessie,
-     'tags': "cats, coffee, playtime, chilling",
-     'picture': None,},
+     'tags': "cats, coffee,playtime,chilling",
+     'picture': 'post_images/cat_cafe.jpg',},
 
      {'title': "Can't wait to tell the grandkids about Rufus!",
      'liked_users': [alexa,jessie],
      'description': "Just got a new pup, Rufus, and I think the twins will love him! Keeping him a secret until they next come round, will keep you all posted!",
      'user': david,
-     'tags': "puppy, dogs, surprise, playtime",
-     'picture': None,}]
+     'tags': "puppy, dogs,surprise,playtime",
+     'picture': 'post_images/rufus.jpg',},
+
+    {'title': 'Cute kittens in Relish!',
+     'liked_users': [david,alexa],
+     'description': "Had the cutest kittens come into Relish today, hope these cuddly customers come back soon!",
+     'user': jessie,
+     'tags': "cute, cats,adorable,work",
+     'picture': 'post_images/relish_kittens.jpg',},
+
+    {'title': 'Kids loving the new hamster!',
+     'liked_users': [david,jessie],
+     'description': "My kids adore Harry the Hamster and can't wait to get home from school everyday to see him!",
+     'user': alexa,
+     'tags': "hamster,hutch",
+     'picture': 'post_images/alexa_harry_hamster.jpg',},
+
+    {'title': 'Harry has pretty much become part of the family',
+     'liked_users': [david,jessie],
+     'description': "Harry and the kids are getting along better than ever, look at what they got him to do!",
+     'user': alexa,
+     'tags': "hamster,cuddly,adorable,playing,fluff",
+     'picture': 'post_images/alexa_harry_bed.jpg',},
+
+    {'title': 'The adventures of paws newman',
+     'liked_users': [alexa,jessie],
+     'description': "The adventures of paws continues!",
+     'user': david,
+     'tags': "dogs,cute,adorable,handsome,boi",
+     'picture': 'post_images/paws_newman.jpg',},]
     
 
     for post in posts:
         add_post(post['title'],post['liked_users'],post['description'],post['picture'],post['tags'],post['user'])
 
-    for i in range(0,200):
-        add_post("test post " + str(i),[david,jessie],"test_post",None, ["help", "this", "isn't", "working"], User.objects.get(username="DSyntop"))
-        
+    comments = ["So cute!","Awww!","I love it!","Adorable!","Can't wait to hear more about this!","Tell me more!","This. This is why this site exists."]
+    
+    
+    for post in Post.objects.all():
+        users = [david,jessie,alexa]
+        #ensure user doesn't comment on own post
+        users.remove(post.user)
+        #select random comment from list
+        comment_num = randint(0,len(comments)-1)
+        #add comment to post
+        add_comment(post,comments[comment_num], choice(users))
+        #remove comment to reduce repetition
+        comments.remove(comments[comment_num])
     
 def add_post(title, liked_users, description, picture, tags, user):
+    #save changes/addition of post
     p = Post.objects.get_or_create(title=title)[0]
-    for user in liked_users:
-        p.liked_users.add(user)
+    for l_user in liked_users:
+        p.liked_users.add(l_user)
     p.description = description
-    p.tags = tags
+    for tag in tags.split(","):
+        p.tags.add(tag)
     p.picture = picture
     p.user = user
     p.save()
     return p
 
+def add_comment(post,comment_text,user):
+    #save comment details
+    comment = Comment.objects.get_or_create(comment_text=comment_text)[0]
+    comment.post = post
+    comment.comment_text = comment_text
+    comment.user = user
+    comment.save()
+    return comment
+
 def add_profile(username, first_name, last_name, password, userPicture, bio):
-    
+    #save user details
     u = User.objects.get_or_create(username=username)[0]
     u.first_name = first_name
     u.last_name = last_name
